@@ -21,7 +21,7 @@ const experiences = [
 
 const Experience: React.FC = () => {
     return (
-        <section id="experience" className="py-20 bg-paper dark:bg-dark-paper relative overflow-hidden">
+        <section id="experience" className="py-16 md:py-20 bg-paper dark:bg-dark-paper relative overflow-hidden">
             {/* Decorative Background Elements */}
             <div className="absolute top-20 right-0 w-64 h-64 bg-orange-200/20 dark:bg-orange-900/10 rounded-full blur-3xl -z-10"></div>
             <div className="absolute bottom-20 left-0 w-72 h-72 bg-blue-200/20 dark:bg-blue-900/10 rounded-full blur-3xl -z-10"></div>

@@ -28,9 +28,12 @@ const Navigation: React.FC<NavigationProps> = ({ isDark, toggleTheme }) => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'py-3 bg-paper dark:bg-dark-paper shadow-md border-b-2 border-ink dark:border-white' : 'py-4 md:py-6 bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <a href="#hero" className="font-display font-bold text-xl md:text-2xl tracking-tight text-ink dark:text-white border-2 border-transparent hover:border-ink dark:hover:border-white hover:bg-orange-400 hover:text-white px-2 -ml-2 transition-all transform hover:-rotate-2">
+    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-3 md:py-6'}`}>
+      {/* Background Layer - Handles blur and styles without trapping fixed children */}
+      <div className={`absolute inset-0 -z-10 transition-all duration-300 ${isScrolled ? 'bg-paper/90 dark:bg-dark-paper/90 backdrop-blur-md shadow-md border-b-2 border-ink dark:border-white' : 'bg-transparent'}`} />
+
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-10">
+        <a href="#hero" className="font-display font-bold text-2xl tracking-tight text-ink dark:text-white border-2 border-transparent hover:border-ink dark:hover:border-white hover:bg-orange-400 hover:text-white px-2 -ml-2 transition-all transform hover:-rotate-2">
           Avi<span className="text-orange-500 hover:text-white">.</span>
         </a>
 
@@ -84,7 +87,7 @@ const Navigation: React.FC<NavigationProps> = ({ isDark, toggleTheme }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-paper dark:bg-dark-paper z-50 flex flex-col items-center justify-center paper-texture"
+            className="fixed inset-0 bg-paper/95 dark:bg-dark-paper/95 backdrop-blur-sm z-50 flex flex-col items-center justify-center paper-texture"
           >
             <button
               className="absolute top-6 right-6 p-2 border-2 border-ink dark:border-white rounded-full hover:bg-orange-400 transition-colors text-ink dark:text-white"
@@ -92,7 +95,7 @@ const Navigation: React.FC<NavigationProps> = ({ isDark, toggleTheme }) => {
             >
               <X size={24} />
             </button>
-            <div className="flex flex-col gap-6 text-center">
+            <div className="flex flex-col gap-8 text-center">
               {links.map((link, idx) => (
                 <motion.a
                   key={link.name}

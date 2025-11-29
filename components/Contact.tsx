@@ -4,7 +4,7 @@ import { Mail, MapPin, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-24 border-t-2 border-ink dark:border-white bg-white dark:bg-stone-900 transition-colors">
+    <section id="contact" className="py-16 md:py-24 border-t-2 border-ink dark:border-white bg-white dark:bg-stone-900 transition-colors">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -15,7 +15,7 @@ const Contact: React.FC = () => {
           <div className="inline-block p-4 bg-ink dark:bg-white text-white dark:text-ink mb-6 transform -rotate-3 neo-shadow">
             <Mail size={32} />
           </div>
-          <h2 className="text-5xl md:text-6xl font-display font-black text-ink dark:text-white mb-6">Let's work together</h2>
+          <h2 className="text-4xl md:text-6xl font-display font-black text-ink dark:text-white mb-6">Let's work together</h2>
           <p className="text-xl text-stone-600 dark:text-stone-400 max-w-lg mx-auto font-medium">
             Got a crazy idea? I'm currently available for freelance projects and full-time roles.
           </p>
@@ -49,14 +49,14 @@ const Contact: React.FC = () => {
             {/* Paper decorative clip */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-stone-200 dark:bg-stone-700 border-2 border-ink dark:border-white opacity-50"></div>
 
-            <div className="grid grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
               <div className="space-y-2">
                 <label className="text-sm font-black text-ink dark:text-white uppercase tracking-wider">Name</label>
-                <input name="name" type="text" required className="w-full bg-white dark:bg-stone-800 p-3 neo-input font-medium text-ink dark:text-white dark:border-stone-500" placeholder="John Doe" />
+                <input name="name" type="text" required className="w-full bg-white dark:bg-stone-800 p-3 neo-input font-medium text-ink dark:text-white dark:border-stone-500" placeholder="Tejas" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-black text-ink dark:text-white uppercase tracking-wider">Email</label>
-                <input name="email" type="email" required className="w-full bg-white dark:bg-stone-800 p-3 neo-input font-medium text-ink dark:text-white dark:border-stone-500" placeholder="john@company.com" />
+                <input name="email" type="email" required className="w-full bg-white dark:bg-stone-800 p-3 neo-input font-medium text-ink dark:text-white dark:border-stone-500" placeholder="tejas@ai.com" />
               </div>
             </div>
             <div className="space-y-2 mb-8">

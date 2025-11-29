@@ -11,7 +11,7 @@ import Warning from './components/Warning';
 
 const Portfolio: React.FC<{ isDark: boolean; toggleTheme: () => void }> = ({ isDark, toggleTheme }) => {
   return (
-    <div className={`min-h-screen relative selection:bg-orange-500 selection:text-white dark:selection:text-ink`}>
+    <div className={`min-h-[100dvh] relative selection:bg-orange-500 selection:text-white dark:selection:text-ink`}>
       <Navigation isDark={isDark} toggleTheme={toggleTheme} />
 
       <main>

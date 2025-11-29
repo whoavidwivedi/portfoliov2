@@ -4,7 +4,7 @@ import { ArrowRight, Github, Linkedin } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden pt-28 pb-32 md:py-20">
+    <section id="hero" className="min-h-[100dvh] flex items-center relative overflow-hidden pt-24 pb-20 md:py-20">
 
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{
@@ -21,14 +21,14 @@ const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 w-full relative z-30 grid md:grid-cols-12 gap-8 md:gap-12 items-center">
 
         <div className="md:col-span-7 order-2 md:order-1 relative">
-          {/* Floating "Sticker" - Hidden on mobile to save space */}
+          {/* Floating "Sticker" - Desktop Only */}
           <motion.div
-            className="hidden md:block absolute -top-12 -left-12 rotate-[-12deg] z-20"
+            className="hidden md:block absolute md:-top-12 md:-left-12 rotate-[-12deg] z-20 md:scale-100 origin-bottom-right"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", delay: 1 }}
           >
-            <div className="bg-yellow-300 dark:bg-yellow-500 text-ink font-bold font-display px-4 py-2 border-2 border-ink dark:border-white neo-shadow">
+            <div className="bg-yellow-300 dark:bg-yellow-500 text-ink font-bold font-display px-4 py-2 border-2 border-ink dark:border-white neo-shadow whitespace-nowrap">
               Hello there! 👋
             </div>
           </motion.div>
@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="font-display text-4xl sm:text-5xl md:text-8xl font-black text-ink dark:text-white leading-[0.95] md:leading-[0.9] mb-6 md:mb-8 tracking-tighter">
+            <h1 className="font-display text-5xl sm:text-6xl md:text-8xl font-black text-ink dark:text-white leading-[0.95] md:leading-[0.9] mb-6 md:mb-8 tracking-tighter">
               CODING <br />
               <span className="text-white bg-orange-500 px-2 inline-block transform -skew-x-6 border-2 border-ink dark:border-white neo-shadow mt-1 md:mt-0">CREATIVE</span><br />
               REALITY.
@@ -55,19 +55,19 @@ const Hero: React.FC = () => {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap gap-4 items-center"
+            className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <a href="#projects" className="px-6 py-3 md:px-8 md:py-4 bg-ink dark:bg-white text-white dark:text-ink text-lg font-bold border-2 border-ink dark:border-white neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center gap-2 group w-full md:w-auto justify-center md:justify-start">
+            <a href="#projects" className="px-6 py-3 md:px-8 md:py-4 bg-ink dark:bg-white text-white dark:text-ink text-lg font-bold border-2 border-ink dark:border-white neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-2 group">
               Check My Work
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
-            <div className="flex gap-4 px-2 md:px-6 text-ink dark:text-white w-full md:w-auto justify-center md:justify-start">
-              <a href="#" className="p-2 border-2 border-transparent hover:border-ink dark:hover:border-white hover:bg-white dark:hover:bg-stone-800 transition-all rounded-lg"><Github size={24} /></a>
-              <a href="#" className="p-2 border-2 border-transparent hover:border-ink dark:hover:border-white hover:bg-white dark:hover:bg-stone-800 transition-all rounded-lg"><Linkedin size={24} /></a>
-              <a href="#" className="p-2 border-2 border-transparent hover:border-ink dark:hover:border-white hover:bg-white dark:hover:bg-stone-800 transition-all rounded-lg">
+            <div className="flex gap-4 justify-center sm:justify-start text-ink dark:text-white">
+              <a href="#" className="p-3 md:p-2 border-2 border-transparent hover:border-ink dark:hover:border-white hover:bg-white dark:hover:bg-stone-800 transition-all rounded-lg"><Github size={24} /></a>
+              <a href="#" className="p-3 md:p-2 border-2 border-transparent hover:border-ink dark:hover:border-white hover:bg-white dark:hover:bg-stone-800 transition-all rounded-lg"><Linkedin size={24} /></a>
+              <a href="#" className="p-3 md:p-2 border-2 border-transparent hover:border-ink dark:hover:border-white hover:bg-white dark:hover:bg-stone-800 transition-all rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
@@ -82,7 +82,19 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="relative w-4/5 md:w-full aspect-square max-w-sm md:max-w-md">
+          <div className="relative w-4/5 sm:w-3/4 md:w-full aspect-square max-w-sm md:max-w-md">
+            {/* Floating "Sticker" - Mobile Only */}
+            <motion.div
+              className="md:hidden absolute -top-8 -left-8 rotate-[-12deg] z-20 scale-90 origin-bottom-right"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", delay: 1 }}
+            >
+              <div className="bg-yellow-300 dark:bg-yellow-500 text-ink font-bold font-display px-4 py-2 border-2 border-ink dark:border-white neo-shadow whitespace-nowrap">
+                Hello there! 👋
+              </div>
+            </motion.div>
+
             {/* Decorative elements behind */}
             <div className="absolute top-4 -right-4 w-full h-full border-2 border-ink dark:border-white bg-orange-400 z-0"></div>
             <div className="absolute -top-4 -left-4 w-full h-full border-2 border-ink dark:border-white bg-white dark:bg-stone-800 pattern-dots z-0"></div>
@@ -101,7 +113,7 @@ const Hero: React.FC = () => {
 
             {/* Floating "Card" Element */}
             <motion.div
-              className="absolute -bottom-8 -left-4 md:-left-8 bg-white dark:bg-stone-800 p-3 md:p-4 border-2 border-ink dark:border-white neo-shadow z-20 max-w-[160px] md:max-w-[200px]"
+              className="absolute -bottom-8 -right-4 md:right-auto md:-left-8 bg-white dark:bg-stone-800 p-3 md:p-4 border-2 border-ink dark:border-white neo-shadow z-20 max-w-[160px] md:max-w-[200px]"
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >

@@ -12,7 +12,7 @@ const Warning: React.FC<WarningProps> = ({ isDark, toggleTheme }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen bg-paper dark:bg-dark-paper text-ink dark:text-stone-100 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+        <div className="min-h-[100dvh] bg-paper dark:bg-dark-paper text-ink dark:text-stone-100 flex flex-col items-center justify-center p-4 relative overflow-hidden">
 
             {/* Theme Toggle */}
             <div className="absolute top-6 right-6 z-50">
