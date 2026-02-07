@@ -5,7 +5,7 @@ import { Briefcase, Calendar } from 'lucide-react';
 const experiences = [
     {
         company: 'takeUforward',
-        role: 'Member of Technical Staff',
+        role: 'Intern',
         period: 'Sep 2025 - Present',
         description: 'Contributing to the development of high-quality educational content and platform features.',
         color: 'bg-orange-500',
