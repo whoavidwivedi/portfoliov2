@@ -48,7 +48,7 @@ const Projects: React.FC = () => {
               I'm currently curating my best work for this showcase. Good things take time (and caffeine).
             </p>
             <div className="inline-block px-3 py-1 md:px-4 md:py-2 bg-ink dark:bg-white text-white dark:text-ink font-mono font-bold text-xs md:text-sm">
-              EST. ARRIVAL: Q4 2025
+              EST. ARRIVAL: Q2 2026
             </div>
           </div>
         </motion.div>
