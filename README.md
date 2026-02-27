@@ -10,7 +10,6 @@ This project runs on Next.js App Router with Tailwind CSS v4 and Bun as the pack
 
 - [Bun](https://bun.sh) 1.2+
 - Node.js 22 (see `.nvmrc`)
-- A Gemini API key (optional for AI chat feature)
 
 ## Getting Started
 
@@ -18,15 +17,11 @@ This project runs on Next.js App Router with Tailwind CSS v4 and Bun as the pack
    ```bash
    bun install
    ```
-2. Create `.env.local` and set:
-   ```bash
-   NEXT_PUBLIC_GEMINI_API_KEY=your_key_here
-   ```
-3. Start development server:
+2. Start development server:
    ```bash
    bun run dev
    ```
-4. Open http://localhost:3000
+3. Open http://localhost:3000
 
 ## Production
 
@@ -44,7 +39,4 @@ Recommended Vercel project settings:
 - Install Command: `bun install`
 - Build Command: `bun run build`
 - Output Directory: leave empty/default for Next.js
-- Environment Variables:
-  - `NEXT_PUBLIC_GEMINI_API_KEY` (Production/Preview/Development as needed)
-
 These commands are also pinned in `vercel.json`.
