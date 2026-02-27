@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Github, Linkedin } from 'lucide-react';
 
+const HERO_IMAGE_URL = "https://drive.google.com/uc?export=view&id=1pzCVDNtjmUn2B-43dD-DBBSEZBItgRwc";
+
 const Hero: React.FC = () => {
   return (
     <section id="hero" className="min-h-[100dvh] flex items-center relative overflow-hidden pt-24 pb-20 md:py-20">
@@ -102,7 +104,7 @@ const Hero: React.FC = () => {
             {/* Main Image Frame */}
             <div className="relative z-10 w-full h-full border-2 border-ink dark:border-white bg-stone-100 dark:bg-stone-900 neo-shadow overflow-hidden group">
               <img
-                src="https://picsum.photos/800/800?grayscale"
+                src={HERO_IMAGE_URL}
                 alt="Avi Dwivedi"
                 className="w-full h-full object-cover mix-blend-multiply opacity-90 transition-all duration-700 group-hover:scale-110 group-hover:mix-blend-normal dark:mix-blend-normal dark:opacity-80"
               />
