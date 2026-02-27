@@ -2,19 +2,41 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# Avi Dwivedi Portfolio (Next.js + Bun)
 
-This contains everything you need to run your app locally.
+This project runs on Next.js App Router with Tailwind CSS v4 and Bun as the package manager.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1WYD_z90-hSaryfzxsTRRJrf_cKMA9wmJ
+## Requirements
 
-## Run Locally
+- [Bun](https://bun.sh) 1.2+
+- Node.js 22 (see `.nvmrc`)
 
-**Prerequisites:**  Node.js
-
+## Getting Started
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+   ```bash
+   bun install
+   ```
+2. Start development server:
+   ```bash
+   bun run dev
+   ```
+3. Open http://localhost:3000
+
+## Production
+
+```bash
+bun run build
+bun run start
+```
+
+## Vercel Deployment
+
+Recommended Vercel project settings:
+
+- Framework Preset: `Next.js`
+- Node.js Version: `22.x`
+- Install Command: `bun install`
+- Build Command: `bun run build`
+- Output Directory: leave empty/default for Next.js
+These commands are also pinned in `vercel.json`.
