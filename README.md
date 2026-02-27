@@ -4,11 +4,12 @@
 
 # Avi Dwivedi Portfolio (Next.js + Bun)
 
-This project now runs on the latest Next.js App Router stack with Tailwind CSS and Bun.
+This project runs on Next.js App Router with Tailwind CSS v4 and Bun as the package manager.
 
 ## Requirements
 
 - [Bun](https://bun.sh) 1.2+
+- Node.js 22 (see `.nvmrc`)
 - A Gemini API key (optional for AI chat feature)
 
 ## Getting Started
@@ -33,3 +34,17 @@ This project now runs on the latest Next.js App Router stack with Tailwind CSS a
 bun run build
 bun run start
 ```
+
+## Vercel Deployment
+
+Recommended Vercel project settings:
+
+- Framework Preset: `Next.js`
+- Node.js Version: `22.x`
+- Install Command: `bun install`
+- Build Command: `bun run build`
+- Output Directory: leave empty/default for Next.js
+- Environment Variables:
+  - `NEXT_PUBLIC_GEMINI_API_KEY` (Production/Preview/Development as needed)
+
+These commands are also pinned in `vercel.json`.

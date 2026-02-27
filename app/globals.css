@@ -1,6 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --color-paper: #fdfbf7;
+  --color-ink: #1c1917;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+  --color-dark-paper: #1c1917;
+  --color-dark-card: #292524;
+  --animate-blob: blob 7s infinite;
+  --animate-marquee: marquee 25s linear infinite;
+}
 
 :root {
   --shadow-color: #1c1917;
