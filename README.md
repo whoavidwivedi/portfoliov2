@@ -1,68 +1,40 @@
 # Avi Dwivedi — Portfolio Website
 
-A modern portfolio website built with **Next.js App Router**, **React 19**, **Tailwind CSS v4**, and **Bun**.
+# Avi Dwivedi Portfolio (Next.js + Bun)
 
-## Tech Stack
+This project runs on Next.js App Router with Tailwind CSS v4 and Bun as the package manager.
 
-- **Framework:** Next.js (App Router)
-- **Runtime / Package Manager:** Bun
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4 + custom global styles
-- **Animations / Icons:** Framer Motion, Lucide React
+## Requirements
 
-## Prerequisites
+- [Bun](https://bun.sh) 1.2+
+- Node.js 22 (see `.nvmrc`)
 
-- [Bun](https://bun.sh) `1.2+`
-- Node.js `22` (see `.nvmrc`)
+## Getting Started
 
-## Local Development
+1. Install dependencies:
+   ```bash
+   bun install
+   ```
+2. Start development server:
+   ```bash
+   bun run dev
+   ```
+3. Open http://localhost:3000
 
-Install dependencies:
-
-```bash
-bun install
-```
-
-Start the development server:
+## Production
 
 ```bash
-bun run dev
+bun run build
+bun run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+## Vercel Deployment
 
-## Available Scripts
+Recommended Vercel project settings:
 
-- `bun run dev` — start local development server
-- `bun run build` — create production build
-- `bun run start` — start production server
-- `bun run lint` — run lint checks
-
-## Project Structure
-
-```text
-app/
-  layout.tsx          # Root layout and global metadata
-  page.tsx            # Home page entry
-  warning/page.tsx    # Warning route
-  globals.css         # Global styles and Tailwind theme tokens
-
-components/           # Reusable UI sections and components
-```
-
-## Deployment (Vercel)
-
-This repository is configured for Vercel via `vercel.json`.
-
-Recommended project settings:
-
-- **Framework Preset:** `Next.js`
-- **Node.js Version:** `22.x`
-- **Install Command:** `bun install`
-- **Build Command:** `bun run build`
-- **Output Directory:** default (leave empty)
-
-## Notes
-
-- This is a Bun-first setup (`packageManager` is pinned in `package.json`).
-- Keep dependencies updated regularly for security and compatibility.
+- Framework Preset: `Next.js`
+- Node.js Version: `22.x`
+- Install Command: `bun install`
+- Build Command: `bun run build`
+- Output Directory: leave empty/default for Next.js
+These commands are also pinned in `vercel.json`.
