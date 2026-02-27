@@ -2,7 +2,7 @@ import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
 // Initialize the client
 // NOTE: We use process.env.API_KEY as required.
-const apiKey = process.env.API_KEY || ''; 
+const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
 
 const PORTFOLIO_CONTEXT = `
