@@ -56,7 +56,7 @@ const Contact: React.FC = () => {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-black text-ink dark:text-white uppercase tracking-wider">Email</label>
-                <input name="email" type="email" required className="w-full bg-white dark:bg-stone-800 p-3 neo-input font-medium text-ink dark:text-white dark:border-stone-500" placeholder="Avi@ai.com" />
+                <input name="email" type="email" required className="w-full bg-white dark:bg-stone-800 p-3 neo-input font-medium text-ink dark:text-white dark:border-stone-500" placeholder="theavidwivedi@gmail.com" />
               </div>
             </div>
             <div className="space-y-2 mb-8">
