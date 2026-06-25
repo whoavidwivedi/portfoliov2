@@ -1,7 +1,7 @@
 "use client"
 
 import { Copy, Mail } from "lucide-react"
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import Lottie from "lottie-react"
 import catCrying from "../public/cat-crying.json"
@@ -20,22 +20,24 @@ export default function Page() {
   const [copied, setCopied] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const [intro, setIntro] = useState(true)
+  const [animIndex, setAnimIndex] = useState(0)
   const { resolvedTheme, setTheme } = useTheme()
 
-  const introAnim = useMemo(() => {
-    const anims = [catCrying, catPlaying, bird, catNoir]
-    return anims[Math.floor(Math.random() * anims.length)]
-  }, [])
+  const anims = [catCrying, catPlaying, bird, catNoir]
 
   useEffect(() => {
-    const t = setTimeout(() => setIntro(false), 1500)
+    if (animIndex >= anims.length - 1) {
+      const t = setTimeout(() => setIntro(false), 1200)
+      return () => clearTimeout(t)
+    }
+    const t = setTimeout(() => setAnimIndex((i) => i + 1), 1200)
     return () => clearTimeout(t)
-  }, [])
+  }, [animIndex])
 
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        <Lottie animationData={introAnim} loop={false} className="size-32" />
+        <Lottie key={animIndex} animationData={anims[animIndex]} loop={false} className="size-32" />
       </div>
     )
   }
