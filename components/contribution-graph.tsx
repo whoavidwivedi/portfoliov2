@@ -73,7 +73,7 @@ export default function ContributionGraph() {
   return (
     <div>
       <p className="mb-3 text-sm text-muted-foreground">
-        {total.toLocaleString()} contributions in the last year
+        {total.toLocaleString()} contributions in {new Date().getFullYear()}
       </p>
       <div className="relative">
         <div
