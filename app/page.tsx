@@ -16,30 +16,43 @@ export default function Page() {
   const [copied, setCopied] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const [intro, setIntro] = useState(true)
-  const [introAnimData, setIntroAnimData] = useState<object | null>(null)
+  const [anims, setAnims] = useState<object[]>([])
+  const [curr, setCurr] = useState(0)
   const { resolvedTheme, setTheme } = useTheme()
 
   useEffect(() => {
     fetch("/api/animations")
       .then((r) => r.json())
-      .then((files: string[]) => {
-        let idx = typeof window !== "undefined" ? Number(localStorage.getItem("animIdx") ?? "0") : 0
-        if (idx >= files.length) idx = 0
-        if (typeof window !== "undefined") localStorage.setItem("animIdx", String(idx + 1))
-        return fetch(`/api/animations?file=${encodeURIComponent(files[idx])}`)
-      })
-      .then((r) => r.json())
-      .then((data) => {
-        setIntroAnimData(data)
-      })
-    const t = setTimeout(() => setIntro(false), 3500)
-    return () => clearTimeout(t)
+      .then((files: string[]) =>
+        Promise.all(
+          files.map((f) =>
+            fetch(`/api/animations?file=${encodeURIComponent(f)}`).then((r) => r.json()),
+          ),
+        ),
+      )
+      .then((data) => setAnims(data))
   }, [])
+
+  useEffect(() => {
+    if (anims.length === 0) return
+    let i = 1
+    const tick = setInterval(() => {
+      if (i < anims.length) setCurr(i++)
+    }, 1000)
+    const done = setTimeout(() => {
+      clearInterval(tick)
+      setIntro(false)
+    }, 3500)
+    return () => {
+      clearInterval(tick)
+      clearTimeout(done)
+    }
+  }, [anims.length])
 
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        {introAnimData && <Lottie animationData={introAnimData} loop style={{ width: 128, height: 128 }} />}
+        {anims.length > 0 && <Lottie animationData={anims[curr]} loop style={{ width: 128, height: 128 }} />}
       </div>
     )
   }
