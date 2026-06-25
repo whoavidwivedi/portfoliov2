@@ -1,7 +1,8 @@
 "use client"
 
-import { Copy, Info, Mail } from "lucide-react"
+import { Copy, Mail } from "lucide-react"
 import { useState } from "react"
+import { useTheme } from "next-themes"
 import ContributionGraph from "@/components/contribution-graph"
 
 function Squiggle() {
@@ -12,14 +13,19 @@ function Squiggle() {
 
 export default function Page() {
   const [copied, setCopied] = useState(false)
+  const [showHint, setShowHint] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
   return (
     <div className="size-full">
       <div className="fixed inset-0 -z-10 dot-grid" />
       <div className="mx-auto max-w-2xl px-6 py-24">
-        <div className="group fixed right-6 top-6 z-50 flex cursor-default flex-col items-end gap-1.5 text-sm text-muted-foreground/50">
-          <Info className="size-3.5" />
-          <span className="cursor-default text-xs opacity-0 transition-opacity group-hover:opacity-100">press <kbd className="rounded border px-1 text-xs">D</kbd> to toggle theme</span>
-        </div>
+        <button
+          onClick={() => { setTheme(resolvedTheme === "dark" ? "light" : "dark"); setShowHint(true); setTimeout(() => setShowHint(false), 2000) }}
+          className="group fixed right-6 top-6 z-50 flex cursor-pointer flex-col items-end gap-1.5"
+        >
+          <span className="block size-2 rounded-full bg-muted-foreground/40" />
+          <span className={`cursor-default whitespace-nowrap text-xs text-muted-foreground/50 transition-opacity ${showHint ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>press <kbd className="rounded border px-1 text-xs">D</kbd> to toggle theme</span>
+        </button>
         <div>
           <div className="mb-20">
             <img
