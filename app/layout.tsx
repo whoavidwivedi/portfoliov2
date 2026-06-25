@@ -8,6 +8,34 @@ import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Avi Dwivedi",
+  description:
+    "Portfolio of Avi Dwivedi — software developer, educator, and builder. I write code, teach people, and build in public.",
+  metadataBase: new URL("https://avidwivedi.dev"),
+  openGraph: {
+    title: "Avi Dwivedi",
+    description:
+      "Portfolio of Avi Dwivedi — software developer, educator, and builder. I write code, teach people, and build in public.",
+    siteName: "Avi Dwivedi",
+    url: "https://avidwivedi.dev",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Avi Dwivedi",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Avi Dwivedi",
+    description:
+      "Portfolio of Avi Dwivedi — software developer, educator, and builder.",
+    images: ["/og.png"],
+    creator: "@whoavidwivedi",
+  },
 }
 
 const fontMono = Geist_Mono({
