@@ -22,14 +22,12 @@ export default function Page() {
   const [intro, setIntro] = useState(true)
   const { resolvedTheme, setTheme } = useTheme()
 
-  const anims = [catCrying, catPlaying, bird, loadingCat]
   const [introAnim] = useState(() => {
-    const last = typeof window !== "undefined" ? Number(localStorage.getItem("lastAnim")) : -1
-    const available = anims.filter((_, i) => i !== last)
-    const pick = available[Math.floor(Math.random() * available.length)]
-    const idx = anims.indexOf(pick)
-    if (typeof window !== "undefined") localStorage.setItem("lastAnim", String(idx))
-    return pick
+    let idx = typeof window !== "undefined" ? Number(localStorage.getItem("animIdx") ?? "0") : 0
+    const anims = [catCrying, catPlaying, bird, loadingCat]
+    if (idx >= anims.length) idx = 0
+    if (typeof window !== "undefined") localStorage.setItem("animIdx", String(idx + 1))
+    return anims[idx]
   })
 
   useEffect(() => {
