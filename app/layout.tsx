@@ -19,21 +19,12 @@ export const metadata: Metadata = {
     url: "https://avidwivedi.dev",
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Avi Dwivedi",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Avi Dwivedi",
     description:
       "Portfolio of Avi Dwivedi — software developer, educator, and builder.",
-    images: ["/og.png"],
     creator: "@whoavidwivedi",
   },
 }
