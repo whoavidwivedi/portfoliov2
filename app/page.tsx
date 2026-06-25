@@ -7,7 +7,6 @@ import Lottie from "lottie-react"
 import catCrying from "../public/cat-crying.json"
 import catPlaying from "../public/cat-playing.json"
 import bird from "../public/bird.json"
-import catNoir from "../public/cat-noir.json"
 import ContributionGraph from "@/components/contribution-graph"
 
 function Squiggle() {
@@ -22,11 +21,14 @@ export default function Page() {
   const [intro, setIntro] = useState(true)
   const { resolvedTheme, setTheme } = useTheme()
 
-  const anims = [catCrying, catPlaying, bird, catNoir]
+  const anims = [catCrying, catPlaying, bird]
   const [introAnim] = useState(() => {
-    const idx = typeof window !== "undefined" ? Number(localStorage.getItem("animCycle") ?? "0") % anims.length : 0
-    if (typeof window !== "undefined") localStorage.setItem("animCycle", String(idx + 1))
-    return anims[idx]
+    const last = typeof window !== "undefined" ? Number(localStorage.getItem("lastAnim")) : -1
+    const available = anims.filter((_, i) => i !== last)
+    const pick = available[Math.floor(Math.random() * available.length)]
+    const idx = anims.indexOf(pick)
+    if (typeof window !== "undefined") localStorage.setItem("lastAnim", String(idx))
+    return pick
   })
 
   useEffect(() => {
@@ -37,9 +39,7 @@ export default function Page() {
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        <div className="flex size-36 items-center justify-center rounded-xl bg-muted/30">
-          <Lottie animationData={introAnim} loop={false} style={{ width: 128, height: 128 }} />
-        </div>
+        <Lottie animationData={introAnim} loop={false} style={{ width: 128, height: 128 }} />
       </div>
     )
   }
