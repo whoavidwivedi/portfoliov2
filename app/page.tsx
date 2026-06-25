@@ -42,7 +42,7 @@ export default function Page() {
     const done = setTimeout(() => {
       clearInterval(tick)
       setIntro(false)
-    }, 3500)
+    }, 5000)
     return () => {
       clearInterval(tick)
       clearTimeout(done)
