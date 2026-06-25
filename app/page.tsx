@@ -29,15 +29,22 @@ export default function Page() {
         return fetch(`/api/animations?file=${encodeURIComponent(files[idx])}`)
       })
       .then((r) => r.json())
-      .then((data) => setIntroAnimData(data))
-    const t = setTimeout(() => setIntro(false), 1200)
-    return () => clearTimeout(t)
+      .then((data) => {
+        setIntroAnimData(data)
+      })
   }, [])
 
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        {introAnimData && <Lottie animationData={introAnimData} loop={false} style={{ width: 128, height: 128 }} />}
+        {introAnimData && (
+          <Lottie
+            animationData={introAnimData}
+            loop={false}
+            onComplete={() => setIntro(false)}
+            style={{ width: 128, height: 128 }}
+          />
+        )}
       </div>
     )
   }
