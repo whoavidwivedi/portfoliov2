@@ -7,6 +7,7 @@ import Lottie from "lottie-react"
 import catCrying from "../public/cat-crying.json"
 import catPlaying from "../public/cat-playing.json"
 import bird from "../public/bird.json"
+import loadingCat from "../public/loading-cat.json"
 import ContributionGraph from "@/components/contribution-graph"
 
 function Squiggle() {
@@ -21,7 +22,7 @@ export default function Page() {
   const [intro, setIntro] = useState(true)
   const { resolvedTheme, setTheme } = useTheme()
 
-  const anims = [catCrying, catPlaying, bird]
+  const anims = [catCrying, catPlaying, bird, loadingCat]
   const [introAnim] = useState(() => {
     const last = typeof window !== "undefined" ? Number(localStorage.getItem("lastAnim")) : -1
     const available = anims.filter((_, i) => i !== last)
