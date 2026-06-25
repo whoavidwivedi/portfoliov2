@@ -32,19 +32,14 @@ export default function Page() {
       .then((data) => {
         setIntroAnimData(data)
       })
+    const t = setTimeout(() => setIntro(false), 3500)
+    return () => clearTimeout(t)
   }, [])
 
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        {introAnimData && (
-          <Lottie
-            animationData={introAnimData}
-            loop={false}
-            onComplete={() => setIntro(false)}
-            style={{ width: 128, height: 128 }}
-          />
-        )}
+        {introAnimData && <Lottie animationData={introAnimData} loop style={{ width: 128, height: 128 }} />}
       </div>
     )
   }
