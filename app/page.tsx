@@ -38,11 +38,11 @@ export default function Page() {
     let i = 1
     const tick = setInterval(() => {
       if (i < anims.length) setCurr(i++)
-    }, 1000)
+    }, 1500)
     const done = setTimeout(() => {
       clearInterval(tick)
       setIntro(false)
-    }, 5000)
+    }, 7500)
     return () => {
       clearInterval(tick)
       clearTimeout(done)
