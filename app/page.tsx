@@ -37,7 +37,9 @@ export default function Page() {
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        <Lottie animationData={introAnim} loop={false} style={{ width: 120, height: 120 }} />
+        <div className="flex size-36 items-center justify-center rounded-xl bg-muted/30">
+          <Lottie animationData={introAnim} loop={false} style={{ width: 128, height: 128 }} />
+        </div>
       </div>
     )
   }
