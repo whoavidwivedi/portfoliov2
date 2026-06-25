@@ -20,38 +20,27 @@ export default function Page() {
   const [copied, setCopied] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const [intro, setIntro] = useState(true)
-  const [animIndex, setAnimIndex] = useState(0)
   const { resolvedTheme, setTheme } = useTheme()
 
   const anims = [catCrying, catPlaying, bird, catNoir]
+  const [introAnim] = useState(() => {
+    const last = typeof window !== "undefined" ? localStorage.getItem("lastAnim") : null
+    const available = anims.filter((_, i) => i !== Number(last))
+    const pick = available[Math.floor(Math.random() * available.length)]
+    const idx = anims.indexOf(pick)
+    if (typeof window !== "undefined") localStorage.setItem("lastAnim", String(idx))
+    return pick
+  })
 
   useEffect(() => {
-    if (animIndex >= anims.length - 1) {
-      const t = setTimeout(() => setIntro(false), 1200)
-      return () => clearTimeout(t)
-    }
-    const t = setTimeout(() => setAnimIndex((i) => i + 1), 1200)
+    const t = setTimeout(() => setIntro(false), 1200)
     return () => clearTimeout(t)
-  }, [animIndex])
+  }, [])
 
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        <div className="relative flex items-center justify-center">
-          <svg className="absolute -rotate-90" width="160" height="160" viewBox="0 0 160 160">
-            <circle cx="80" cy="80" r="70" fill="none" stroke="currentColor" className="text-muted-foreground/15" strokeWidth="6" />
-            <circle
-              key={animIndex}
-              cx="80" cy="80" r="70" fill="none" stroke="rgb(251,146,60)" strokeWidth="6"
-              strokeLinecap="round"
-              strokeDasharray={2 * Math.PI * 70}
-              strokeDashoffset={2 * Math.PI * 70}
-              className="transition-all duration-[1200ms] ease-linear"
-              style={{ strokeDashoffset: 0 }}
-            />
-          </svg>
-          <Lottie key={animIndex} animationData={anims[animIndex]} loop={false} className="size-28" />
-        </div>
+        <Lottie animationData={introAnim} loop={false} className="size-32" />
       </div>
     )
   }
