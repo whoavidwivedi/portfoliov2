@@ -4,10 +4,6 @@ import { Copy, Mail } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import Lottie from "lottie-react"
-import catCrying from "../public/cat-crying.json"
-import catPlaying from "../public/cat-playing.json"
-import bird from "../public/bird.json"
-import loadingCat from "../public/loading-cat.json"
 import ContributionGraph from "@/components/contribution-graph"
 
 function Squiggle() {
@@ -20,17 +16,20 @@ export default function Page() {
   const [copied, setCopied] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const [intro, setIntro] = useState(true)
+  const [introAnimData, setIntroAnimData] = useState<object | null>(null)
   const { resolvedTheme, setTheme } = useTheme()
 
-  const [introAnim] = useState(() => {
-    let idx = typeof window !== "undefined" ? Number(localStorage.getItem("animIdx") ?? "0") : 0
-    const anims = [catCrying, catPlaying, bird, loadingCat]
-    if (idx >= anims.length) idx = 0
-    if (typeof window !== "undefined") localStorage.setItem("animIdx", String(idx + 1))
-    return anims[idx]
-  })
-
   useEffect(() => {
+    fetch("/api/animations")
+      .then((r) => r.json())
+      .then((files: string[]) => {
+        let idx = typeof window !== "undefined" ? Number(localStorage.getItem("animIdx") ?? "0") : 0
+        if (idx >= files.length) idx = 0
+        if (typeof window !== "undefined") localStorage.setItem("animIdx", String(idx + 1))
+        return fetch(`/api/animations?file=${encodeURIComponent(files[idx])}`)
+      })
+      .then((r) => r.json())
+      .then((data) => setIntroAnimData(data))
     const t = setTimeout(() => setIntro(false), 1200)
     return () => clearTimeout(t)
   }, [])
@@ -38,7 +37,7 @@ export default function Page() {
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        <Lottie animationData={introAnim} loop={false} style={{ width: 128, height: 128 }} />
+        {introAnimData && <Lottie animationData={introAnimData} loop={false} style={{ width: 128, height: 128 }} />}
       </div>
     )
   }
