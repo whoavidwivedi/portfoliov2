@@ -37,7 +37,21 @@ export default function Page() {
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        <Lottie key={animIndex} animationData={anims[animIndex]} loop={false} className="size-32" />
+        <div className="relative flex items-center justify-center">
+          <svg className="absolute -rotate-90" width="160" height="160" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r="70" fill="none" stroke="currentColor" className="text-muted-foreground/15" strokeWidth="6" />
+            <circle
+              key={animIndex}
+              cx="80" cy="80" r="70" fill="none" stroke="rgb(251,146,60)" strokeWidth="6"
+              strokeLinecap="round"
+              strokeDasharray={2 * Math.PI * 70}
+              strokeDashoffset={2 * Math.PI * 70}
+              className="transition-all duration-[1200ms] ease-linear"
+              style={{ strokeDashoffset: 0 }}
+            />
+          </svg>
+          <Lottie key={animIndex} animationData={anims[animIndex]} loop={false} className="size-28" />
+        </div>
       </div>
     )
   }
