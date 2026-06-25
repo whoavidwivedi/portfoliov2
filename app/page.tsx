@@ -24,12 +24,9 @@ export default function Page() {
 
   const anims = [catCrying, catPlaying, bird, catNoir]
   const [introAnim] = useState(() => {
-    const last = typeof window !== "undefined" ? localStorage.getItem("lastAnim") : null
-    const available = anims.filter((_, i) => i !== Number(last))
-    const pick = available[Math.floor(Math.random() * available.length)]
-    const idx = anims.indexOf(pick)
-    if (typeof window !== "undefined") localStorage.setItem("lastAnim", String(idx))
-    return pick
+    const idx = typeof window !== "undefined" ? Number(localStorage.getItem("animCycle") ?? "0") % anims.length : 0
+    if (typeof window !== "undefined") localStorage.setItem("animCycle", String(idx + 1))
+    return anims[idx]
   })
 
   useEffect(() => {
