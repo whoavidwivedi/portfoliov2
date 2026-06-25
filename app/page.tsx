@@ -1,10 +1,13 @@
 "use client"
 
 import { Copy, Mail } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useTheme } from "next-themes"
 import Lottie from "lottie-react"
 import catCrying from "../public/cat-crying.json"
+import catPlaying from "../public/cat-playing.json"
+import bird from "../public/bird.json"
+import catNoir from "../public/cat-noir.json"
 import ContributionGraph from "@/components/contribution-graph"
 
 function Squiggle() {
@@ -17,35 +20,22 @@ export default function Page() {
   const [copied, setCopied] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const [intro, setIntro] = useState(true)
-  const [circleGrow, setCircleGrow] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
 
+  const introAnim = useMemo(() => {
+    const anims = [catCrying, catPlaying, bird, catNoir]
+    return anims[Math.floor(Math.random() * anims.length)]
+  }, [])
+
   useEffect(() => {
-    const t1 = setTimeout(() => setCircleGrow(true), 1000)
-    const t2 = setTimeout(() => setIntro(false), 1800)
-    return () => { clearTimeout(t1); clearTimeout(t2) }
+    const t = setTimeout(() => setIntro(false), 1500)
+    return () => clearTimeout(t)
   }, [])
 
   if (intro) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        <div
-          className="absolute transition-all duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)]"
-          style={{
-            width: "200vmax",
-            height: "200vmax",
-            left: "50%",
-            top: "50%",
-            transform: `translate(-50%, -50%) scale(${circleGrow ? 1 : 0})`,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgb(249,115,22) 0%, rgb(234,88,12) 100%)",
-          }}
-        />
-        <Lottie
-          animationData={catCrying}
-          loop={false}
-          className={`relative z-10 size-32 transition-all duration-500 ${circleGrow ? "scale-50 opacity-0" : "scale-100 opacity-100"}`}
-        />
+        <Lottie animationData={introAnim} loop={false} className="size-32" />
       </div>
     )
   }
