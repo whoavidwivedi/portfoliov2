@@ -1,9 +1,8 @@
 "use client"
 
 import { Copy, Mail } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useTheme } from "next-themes"
-import Lottie from "lottie-react"
 import ContributionGraph from "@/components/contribution-graph"
 
 function Squiggle() {
@@ -15,47 +14,7 @@ function Squiggle() {
 export default function Page() {
   const [copied, setCopied] = useState(false)
   const [showHint, setShowHint] = useState(false)
-  const [intro, setIntro] = useState(true)
-  const [anims, setAnims] = useState<object[]>([])
-  const [curr, setCurr] = useState(0)
   const { resolvedTheme, setTheme } = useTheme()
-
-  useEffect(() => {
-    fetch("/api/animations")
-      .then((r) => r.json())
-      .then((files: string[]) =>
-        Promise.all(
-          files.map((f) =>
-            fetch(`/api/animations?file=${encodeURIComponent(f)}`).then((r) => r.json()),
-          ),
-        ),
-      )
-      .then((data) => setAnims(data))
-  }, [])
-
-  useEffect(() => {
-    if (anims.length === 0) return
-    let i = 1
-    const tick = setInterval(() => {
-      if (i < anims.length) setCurr(i++)
-    }, 1500)
-    const done = setTimeout(() => {
-      clearInterval(tick)
-      setIntro(false)
-    }, 7500)
-    return () => {
-      clearInterval(tick)
-      clearTimeout(done)
-    }
-  }, [anims.length])
-
-  if (intro) {
-    return (
-      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
-        {anims.length > 0 && <Lottie animationData={anims[curr]} loop style={{ width: 128, height: 128 }} />}
-      </div>
-    )
-  }
 
   return (
     <div className="size-full">
