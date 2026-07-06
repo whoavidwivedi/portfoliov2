@@ -3,7 +3,6 @@
 import { Copy, Mail } from "lucide-react"
 import { useState } from "react"
 import { useTheme } from "next-themes"
-import ContributionGraph from "@/components/contribution-graph"
 
 function Squiggle() {
   return (
@@ -176,17 +175,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="mb-20">
-            <div className="w-fit">
-              <h2 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-                Contributions
-              </h2>
-              <Squiggle />
-            </div>
-            <div className="mt-6">
-              <ContributionGraph />
-            </div>
-          </div>
+        
 
           <div className="border-t py-8 text-sm text-muted-foreground">
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
