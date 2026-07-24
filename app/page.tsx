@@ -146,7 +146,7 @@ export default function Page() {
               ].map((p) => (
                 <div key={p.name}>
                   <a
-                    href={`https://github.com/whoavidwivedi/${p.name}`}
+                    href={`https://${p.name.toLowerCase()}.whoavidwivedi.work`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-base font-medium transition-colors hover:text-orange-500"
