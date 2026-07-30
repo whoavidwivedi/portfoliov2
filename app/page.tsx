@@ -8,6 +8,37 @@ function Squiggle() {
   return <div className="h-px w-full bg-orange-300 dark:bg-orange-600" />
 }
 
+type Project = {
+  name: string
+  desc: string
+  link?: string
+}
+
+const PROJECTS: Project[] = [
+  {
+    name: "Better Space",
+    desc: "Better Space project.",
+    link: "space",
+  },
+  {
+    name: "Gitenius",
+    desc: "Git-powered portfolio and project showcase.",
+  },
+  {
+    name: "pricing-section",
+    desc: "Pricing section UI component built with Next.js.",
+  },
+  { name: "Time", desc: "A time-related utility or app." },
+  {
+    name: "scratch-the-doubt",
+    desc: "Doubt-solving platform for students.",
+  },
+  {
+    name: "wordloom-studio",
+    desc: "Word-like name generator from English letter patterns.",
+  },
+]
+
 export default function Page() {
   const [copied, setCopied] = useState(false)
   const [showHint, setShowHint] = useState(false)
@@ -195,30 +226,7 @@ export default function Page() {
               <Squiggle />
             </div>
             <div className="mt-6 space-y-6">
-              {[
-                {
-                  name: "Better Space",
-                  desc: "Better Space project.",
-                  link: "space",
-                },
-                {
-                  name: "Gitenius",
-                  desc: "Git-powered portfolio and project showcase.",
-                },
-                {
-                  name: "pricing-section",
-                  desc: "Pricing section UI component built with Next.js.",
-                },
-                { name: "Time", desc: "A time-related utility or app." },
-                {
-                  name: "scratch-the-doubt",
-                  desc: "Doubt-solving platform for students.",
-                },
-                {
-                  name: "wordloom-studio",
-                  desc: "Word-like name generator from English letter patterns.",
-                },
-              ] as { name: string; desc: string; link?: string }[]).map((p) => (
+              {PROJECTS.map((p) => (
                 <div key={p.name}>
                   <a
                     href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
