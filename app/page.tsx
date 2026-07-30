@@ -197,6 +197,11 @@ export default function Page() {
             <div className="mt-6 space-y-6">
               {[
                 {
+                  name: "Better Space",
+                  desc: "Better Space project.",
+                  link: "space",
+                },
+                {
                   name: "Gitenius",
                   desc: "Git-powered portfolio and project showcase.",
                 },
@@ -213,14 +218,10 @@ export default function Page() {
                   name: "wordloom-studio",
                   desc: "Word-like name generator from English letter patterns.",
                 },
-                {
-                  name: "Space",
-                  desc: "Space project.",
-                },
-              ].map((p) => (
+              ] as { name: string; desc: string; link?: string }[]).map((p) => (
                 <div key={p.name}>
                   <a
-                    href={`https://${p.name.toLowerCase()}.whoavidwivedi.work`}
+                    href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-base font-medium transition-colors hover:text-orange-500"
