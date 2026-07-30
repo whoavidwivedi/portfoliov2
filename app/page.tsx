@@ -213,6 +213,10 @@ export default function Page() {
                   name: "wordloom-studio",
                   desc: "Word-like name generator from English letter patterns.",
                 },
+                {
+                  name: "Space",
+                  desc: "Space project.",
+                },
               ].map((p) => (
                 <div key={p.name}>
                   <a
