@@ -50,9 +50,9 @@ export default function Page() {
   }, [])
 
   return (
-    <div className="size-full">
-      <div className="fixed inset-0 -z-10 dot-grid" />
-      <div className="mx-auto max-w-2xl px-6 py-24">
+    <div className="size-full min-h-screen selection:bg-orange-400 selection:text-white dark:selection:bg-orange-600">
+      <div className="fixed inset-0 -z-10 dot-grid opacity-50 dark:opacity-40" />
+      <div className="mx-auto max-w-2xl px-6 py-24 sm:py-32">
         <button
           onClick={() => {
             setTheme(resolvedTheme === "dark" ? "light" : "dark")
@@ -77,25 +77,28 @@ export default function Page() {
             theme
           </span>
         </button>
-        <div>
-          <div className="mb-20">
+        <div className="flex flex-col gap-24">
+          <section className="animate-fade-in-up [animation-delay:100ms] [animation-fill-mode:both]">
             <img
               src="https://avatars.githubusercontent.com/u/85203267?v=4"
               alt="Avi Dwivedi"
               draggable={false}
-              className="mb-5 size-14 rounded-full select-none"
+              className="mb-6 size-16 rounded-full ring-2 ring-orange-500/20 select-none hover:ring-orange-500/50 transition-all duration-300"
             />
-            <h1 className="text-4xl font-bold tracking-tight">
-              Avi Dwivedi{" "}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <h1 className="text-4xl font-bold tracking-tight">
+                Avi Dwivedi
+              </h1>
               <a
                 href="https://drive.google.com/file/d/11X4aurZIyXi59lym2Fs8QQwaojPnNe7X/view"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full border border-muted-foreground/30 px-2.5 py-0.5 text-xs font-normal text-muted-foreground transition-colors hover:border-orange-500 hover:text-orange-500"
+                className="inline-flex w-fit items-center gap-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 px-3 py-1 text-xs font-medium text-orange-600 dark:text-orange-400 transition-all hover:bg-orange-500/20 hover:border-orange-500/30 active:scale-95"
               >
-                resume
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Resume
               </a>
-            </h1>
+            </div>
             <p className="mt-2 text-base text-muted-foreground">
               focusing &middot; ex-intern @takeUforward &middot; ex-educator
               @BrightCHAMPS
@@ -188,70 +191,83 @@ export default function Page() {
                 </a>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div className="mb-20">
-            <div className="w-fit">
+          <section className="animate-fade-in-up [animation-delay:300ms] [animation-fill-mode:both]">
+            <div className="w-fit mb-8">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Experience
               </h2>
               <Squiggle />
             </div>
-            <div className="mt-6 space-y-8">
+            <div className="mt-6 relative border-l border-muted-foreground/20 ml-3 space-y-8">
               {[
                 {
-                  title: "Intern @ takeUforward",
+                  title: "Intern",
+                  company: "takeUforward",
                   period: "Sep 2025 — May 2026",
                 },
                 {
-                  title: "Coding Educator @ BrightCHAMPS",
+                  title: "Coding Educator",
+                  company: "BrightCHAMPS",
                   period: "Sep 2024 — Feb 2025",
                 },
               ].map((item) => (
-                <div key={item.title}>
-                  <p className="text-base font-medium">{item.title}</p>
-                  <p className="mt-0.5 text-sm text-muted-foreground">
-                    {item.period}
-                  </p>
+                <div key={item.title + item.company} className="relative pl-6">
+                  <div className="absolute -left-[5px] top-2 size-2.5 rounded-full border-2 border-background bg-orange-400 dark:bg-orange-600 ring-2 ring-muted-foreground/20" />
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+                    <p className="text-base font-medium">
+                      {item.title} <span className="text-orange-500/80">@ {item.company}</span>
+                    </p>
+                    <p className="mt-1 sm:mt-0 text-xs text-muted-foreground">
+                      {item.period}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className="mb-20">
-            <div className="w-fit">
+          <section className="animate-fade-in-up [animation-delay:500ms] [animation-fill-mode:both]">
+            <div className="w-fit mb-8">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Projects
               </h2>
               <Squiggle />
             </div>
-            <div className="mt-6 space-y-6">
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {PROJECTS.map((p) => (
-                <div key={p.name}>
-                  <a
-                    href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base font-medium transition-colors hover:text-orange-500"
-                  >
-                    {p.name}
-                  </a>
-                  <p className="mt-1 text-base text-muted-foreground">
-                    {p.desc}
-                  </p>
-                </div>
+                <a
+                  key={p.name}
+                  href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex flex-col justify-between rounded-xl border border-muted-foreground/20 bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:border-orange-500/50 hover:bg-muted/40 hover:shadow-lg hover:shadow-orange-500/5"
+                >
+                  <div>
+                    <h3 className="text-base font-medium group-hover:text-orange-500 transition-colors">
+                      {p.name}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                      {p.desc}
+                    </p>
+                  </div>
+                  <div className="mt-4 flex items-center text-xs font-medium text-orange-500 opacity-0 transition-opacity group-hover:opacity-100">
+                    View Project <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
+                  </div>
+                </a>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className="mb-20">
-            <div className="w-fit">
+          <section className="animate-fade-in-up [animation-delay:700ms] [animation-fill-mode:both]">
+            <div className="w-fit mb-8">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Skills
               </h2>
               <Squiggle />
             </div>
-            <div className="mt-6 flex flex-wrap gap-x-2 gap-y-2 text-sm text-muted-foreground">
+            <div className="mt-6 flex flex-wrap gap-2">
               {[
                 "C",
                 "C++",
@@ -266,15 +282,15 @@ export default function Page() {
               ].map((s) => (
                 <span
                   key={s}
-                  className="before:mr-2 before:content-['·'] first:before:content-none"
+                  className="inline-flex items-center rounded-md border border-muted-foreground/20 bg-muted/30 px-2.5 py-1 text-xs font-medium text-foreground transition-colors hover:border-orange-500/50 hover:bg-orange-500/10 hover:text-orange-600 dark:hover:text-orange-400 cursor-default"
                 >
                   {s}
                 </span>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className="border-t py-8 text-sm text-muted-foreground">
+          <footer className="animate-fade-in-up [animation-delay:900ms] [animation-fill-mode:both] border-t py-8 text-sm text-muted-foreground">
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <p>&copy; 2026 Avi Dwivedi.</p>
               <div className="flex items-center gap-4">
@@ -322,7 +338,7 @@ export default function Page() {
                 </a>
               </div>
             </div>
-          </div>
+          </footer>
         </div>
       </div>
     </div>
