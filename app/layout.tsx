@@ -1,10 +1,9 @@
 import "@fontsource-variable/google-sans-flex"
-import { Geist_Mono } from "next/font/google"
 import type { Metadata } from "next"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 export const metadata: Metadata = {
   title: "Avi Dwivedi",
@@ -29,24 +28,17 @@ export const metadata: Metadata = {
   },
 }
 
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-})
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable)}
-    >
+    <html lang="en" suppressHydrationWarning className="antialiased">
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <TooltipProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </TooltipProvider>
       </body>
 
     </html>
