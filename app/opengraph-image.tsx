@@ -14,7 +14,7 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           background: "#0c0a09",
-          fontFamily: "Geist Mono",
+          fontFamily: "sans-serif",
           position: "relative",
           overflow: "hidden",
         }}
@@ -64,6 +64,7 @@ export default function Image() {
                 src="https://avatars.githubusercontent.com/u/85203267?v=4"
                 width={72}
                 height={72}
+                alt=""
                 style={{ borderRadius: "50%" }}
               />
             </div>
