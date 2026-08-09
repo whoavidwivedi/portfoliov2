@@ -88,15 +88,14 @@ function describeDay({ count, date }: Contribution) {
   return `${count} ${noun} on ${DATE_FORMAT.format(new Date(`${date}T00:00:00`))}`;
 }
 
-const CALENDAR_API = "https://github-contributions-api.jogruber.de/v4";
-
 type ApiDay = { date: string; count: number; level: number };
 
-async function fetchCalendar(login: string) {
-  const res = await fetch(`${CALENDAR_API}/${login}?y=last`);
+async function fetchCalendar() {
+  const res = await fetch("/api/contributions", { cache: "no-store" });
   if (!res.ok) return null;
 
-  const days: ApiDay[] = (await res.json())?.contributions ?? [];
+  const payload = (await res.json()) as { days?: ApiDay[] } | null;
+  const days: ApiDay[] = payload?.days ?? [];
   if (!days.length) return null;
 
   // columns are weeks, so the first day has to be a sunday or every column shears
@@ -111,15 +110,15 @@ async function fetchCalendar(login: string) {
   }));
 }
 
-function useContributions(login?: string) {
+function useContributions(enabled = true) {
   const [data, setData] = React.useState<Contribution[]>();
   const [loaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
-    if (!login) return;
+    if (!enabled) return;
     let active = true;
 
-    fetchCalendar(login)
+    fetchCalendar()
       .then((contributions) => {
         if (active && contributions) setData(contributions);
       })
@@ -131,7 +130,7 @@ function useContributions(login?: string) {
     return () => {
       active = false;
     };
-  }, [login]);
+  }, [enabled]);
 
   return { data, loaded };
 }
@@ -341,9 +340,7 @@ const GitHubActivity = ({
   style,
   ...props
 }: GitHubActivityProps) => {
-  const { data: fetched, loaded } = useContributions(
-    contributionsProp.length ? undefined : username,
-  );
+  const { data: fetched, loaded } = useContributions(!contributionsProp.length);
   const placeholder = React.useMemo(
     () => (username ? emptyDays(weeksFor(months)) : []),
     [username, months],
