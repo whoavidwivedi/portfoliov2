@@ -2,7 +2,22 @@ import { NextResponse } from "next/server"
 
 export const dynamic = "force-dynamic"
 
-export async function GET(request: Request) {
+type ApiDay = {
+  date: string
+  count: number
+  level: number
+}
+
+type GqlDay = {
+  date: string
+  contributionCount: number
+}
+
+type GqlWeek = {
+  contributionDays: GqlDay[]
+}
+
+export async function GET() {
   const token = process.env.GITHUB_TOKEN
   const username = "whoavidwivedi"
 
@@ -63,8 +78,8 @@ export async function GET(request: Request) {
           const calendar = json.data.user.contributionsCollection.contributionCalendar
           const totalCount = calendar.totalContributions
           
-          const days = calendar.weeks.flatMap((week: any) => 
-            week.contributionDays.map((day: any) => {
+          const days = calendar.weeks.flatMap((week: GqlWeek) => 
+            week.contributionDays.map((day: GqlDay) => {
               const count = day.contributionCount
               let level = 0
               if (count > 0 && count <= 3) level = 1
@@ -94,7 +109,7 @@ export async function GET(request: Request) {
       const fallbackData = await fallbackRes.json()
       const totalCount = fallbackData.total?.lastYear ?? 0
       
-      const days = fallbackData.contributions?.map((day: any) => ({
+      const days = fallbackData.contributions?.map((day: ApiDay) => ({
         date: day.date,
         count: day.count,
         level: day.level
