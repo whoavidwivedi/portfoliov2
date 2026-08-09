@@ -130,7 +130,7 @@ export default function Page() {
               draggable={false}
               className="mb-5 size-14 rounded-full select-none"
             />
-<h1 className="text-4xl font-bold tracking-tight">
+<h1 className="text-4xl font-bold tracking-tight text-balance">
               Avi Dwivedi{" "}
               <Button
                 variant="outline"
@@ -148,11 +148,11 @@ export default function Page() {
                 }
               />
             </h1>
-            <p className="mt-2 text-base text-muted-foreground">
+            <p className="mt-2 text-base text-muted-foreground text-pretty">
               focusing &middot; ex-intern @takeUforward &middot; ex-educator
               @BrightCHAMPS
             </p>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground text-pretty">
               A developer who enjoys building useful things, teaching what I
               know, and learning what I don&rsquo;t. I believe in simple code,
               clear communication, and creating tools that actually make a
@@ -168,7 +168,7 @@ export default function Page() {
               <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-2">
                 <a
                   href="mailto:theavidwivedi@gmail.com"
-                  className="flex items-center gap-1.5 transition-colors hover:text-orange-500"
+                  className="flex items-center gap-1.5 hover:text-orange-500"
                 >
                   <Mail className="size-3.5" />
                   theavidwivedi@gmail.com
@@ -199,7 +199,7 @@ export default function Page() {
                   href="https://github.com/whoavidwivedi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 transition-colors hover:text-orange-500"
+                  className="flex items-center gap-1.5 hover:text-orange-500"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -214,7 +214,7 @@ export default function Page() {
                   href="https://linkedin.com/in/whoavidwivedi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 transition-colors hover:text-orange-500"
+                  className="flex items-center gap-1.5 hover:text-orange-500"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -229,7 +229,7 @@ export default function Page() {
                   href="https://x.com/whoavidwivedi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 transition-colors hover:text-orange-500"
+                  className="flex items-center gap-1.5 hover:text-orange-500"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -286,7 +286,7 @@ export default function Page() {
                     href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-medium transition-colors hover:text-orange-500"
+                    className="text-base font-medium hover:text-orange-500"
                   >
                     {p.name}
                   </a>
