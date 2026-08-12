@@ -12,7 +12,7 @@ export type Contribution = {
   level: ContributionLevel;
 };
 
-const DEFAULT_ACCENT = "#7d7d7d";
+const DEFAULT_ACCENT = "#39d353";
 const DEFAULT_CELL_SIZE = 11;
 const DEFAULT_MONTHS = 12;
 const WEEKS_PER_MONTH = 365.25 / 12 / 7;

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 
 export const dynamic = "force-dynamic"
 
+const USERNAME = "whoavidwivedi"
+
 type ApiDay = {
   date: string
   count: number
@@ -17,21 +19,64 @@ type GqlWeek = {
   contributionDays: GqlDay[]
 }
 
+function levelForCount(count: number) {
+  if (count <= 0) return 0
+  if (count <= 3) return 1
+  if (count <= 6) return 2
+  if (count <= 9) return 3
+  return 4
+}
+
+// GitHub renders the contribution graph on its own profile partial
+// (https://github.com/users/<user>/contributions). Each day is a td with
+// data-date/data-level plus a <tool-tip> carrying the exact count. This is
+// GitHub's own realtime data and needs no token.
+function parseContributionsFragment(fragment: string): ApiDay[] {
+  const cells = new Map<string, { date: string; level: number }>()
+  const cellRe = /data-date="(\d{4}-\d{2}-\d{2})" id="(contribution-day-component-\d+-\d+)" data-level="(\d)"/g
+  let cellMatch: RegExpExecArray | null
+  while ((cellMatch = cellRe.exec(fragment))) {
+    cells.set(cellMatch[2], { date: cellMatch[1], level: Number(cellMatch[3]) })
+  }
+
+  const tips = new Map<string, string>()
+  const tipRe = /<tool-tip[^>]*for="(contribution-day-component-\d+-\d+)"[^>]*>([\s\S]*?)<\/tool-tip>/g
+  let tipMatch: RegExpExecArray | null
+  while ((tipMatch = tipRe.exec(fragment))) {
+    tips.set(tipMatch[1], tipMatch[2])
+  }
+
+  const days: ApiDay[] = []
+  for (const [id, { date, level }] of cells) {
+    const tip = tips.get(id)?.replace(/\s+/g, " ").trim() ?? ""
+    const countMatch = tip.match(/(\d+)\s+contributions?/)
+    const count = countMatch ? Number(countMatch[1]) : 0
+
+    if (date) days.push({ date, count, level })
+  }
+
+  return days.sort((a, b) => a.date.localeCompare(b.date))
+}
+
 export async function GET() {
+  const userAgent = "portfoliov2/1.0 (+https://github.com/whoavidwivedi/portfoliov2)"
   const token = process.env.GITHUB_TOKEN
-  const username = "whoavidwivedi"
 
   try {
-    const eventsRes = await fetch(`https://api.github.com/users/${username}/events?per_page=100`, {
-      headers: { Accept: "application/vnd.github.v3+json" },
-      next: { revalidate: 600 },
+    const eventsRes = await fetch(`https://api.github.com/users/${USERNAME}/events?per_page=100`, {
+      headers: { Accept: "application/vnd.github.v3+json", "User-Agent": userAgent },
+      cache: "no-store",
     })
-    
+
     const reposByDate: Record<string, string[]> = {}
     if (eventsRes.ok) {
       const events = await eventsRes.json()
       for (const event of events) {
-        if (event.type === "PushEvent" || event.type === "CreateEvent" || event.type === "PullRequestEvent") {
+        if (
+          event.type === "PushEvent" ||
+          event.type === "CreateEvent" ||
+          event.type === "PullRequestEvent"
+        ) {
           const date = event.created_at?.slice(0, 10)
           const repo = event.repo?.name
           if (date && repo) {
@@ -42,7 +87,7 @@ export async function GET() {
       }
     }
 
-    // Try GraphQL if token exists
+    // Prefer the official GraphQL API when a token is configured.
     if (token) {
       const query = `
         query($username: String!) {
@@ -61,61 +106,54 @@ export async function GET() {
           }
         }
       `
-      
+
       const gqlRes = await fetch("https://api.github.com/graphql", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
+          "User-Agent": userAgent,
         },
-        body: JSON.stringify({ query, variables: { username } }),
-        next: { revalidate: 3600 },
+        body: JSON.stringify({ query, variables: { username: USERNAME } }),
+        cache: "no-store",
       })
-      
+
       if (gqlRes.ok) {
         const json = await gqlRes.json()
         if (!json.errors && json.data) {
           const calendar = json.data.user.contributionsCollection.contributionCalendar
-          const totalCount = calendar.totalContributions
-          
-          const days = calendar.weeks.flatMap((week: GqlWeek) => 
-            week.contributionDays.map((day: GqlDay) => {
-              const count = day.contributionCount
-              let level = 0
-              if (count > 0 && count <= 3) level = 1
-              else if (count > 3 && count <= 6) level = 2
-              else if (count > 6 && count <= 9) level = 3
-              else if (count > 9) level = 4
-              
-              return {
-                date: day.date,
-                count: count,
-                level: level,
-              }
-            })
+
+          const days = calendar.weeks.flatMap((week: GqlWeek) =>
+            week.contributionDays.map((day: GqlDay) => ({
+              date: day.date,
+              count: day.contributionCount,
+              level: levelForCount(day.contributionCount),
+            })),
           )
-          
-          return NextResponse.json({ totalCount, days, reposByDate })
+
+          return NextResponse.json({
+            totalCount: calendar.totalContributions,
+            days,
+            reposByDate,
+          })
         }
       }
     }
 
-    // Fallback: Use jogruber API
-    const fallbackRes = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`, {
-      next: { revalidate: 3600 }
+    // Otherwise read GitHub's own realtime contribution calendar partial.
+    const fragmentRes = await fetch(`https://github.com/users/${USERNAME}/contributions`, {
+      headers: { "User-Agent": userAgent },
+      cache: "no-store",
     })
-    
-    if (fallbackRes.ok) {
-      const fallbackData = await fallbackRes.json()
-      const totalCount = fallbackData.total?.lastYear ?? 0
-      
-      const days = fallbackData.contributions?.map((day: ApiDay) => ({
-        date: day.date,
-        count: day.count,
-        level: day.level
-      })) ?? []
 
-      return NextResponse.json({ totalCount, days, reposByDate })
+    if (fragmentRes.ok) {
+      const fragment = await fragmentRes.text()
+      const days = parseContributionsFragment(fragment)
+      const totalCount = days.reduce((sum, day) => sum + day.count, 0)
+
+      if (days.length) {
+        return NextResponse.json({ totalCount, days, reposByDate })
+      }
     }
 
     return NextResponse.json({ totalCount: 0, days: [], reposByDate })
