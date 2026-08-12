@@ -329,7 +329,7 @@ export default function Page() {
           </div>
 
           <div className="relative mb-20">
-            <GitHubActivity username="whoavidwivedi" />
+            <GitHubActivity username="whoavidwivedi" showMonths />
           </div>
 
           <div className="mb-20">
