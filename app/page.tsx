@@ -151,9 +151,9 @@ export default function Page() {
               Avi Dwivedi{" "}
               <Button
                 variant="outline"
-                size="lg"
+                size="sm"
                 nativeButton={false}
-                className="align-middle rounded-full"
+                className="align-middle rounded-full uppercase tracking-wide transition-colors duration-200 hover:border-orange-500/60 hover:bg-orange-500/5 hover:text-orange-500"
                 render={
                   <a
                     href="https://drive.google.com/file/d/11X4aurZIyXi59lym2Fs8QQwaojPnNe7X/view"
