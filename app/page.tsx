@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpRight, Check, Copy, Mail, Sun, Moon, Monitor, MapPin } from "lucide-react"
+import { ArrowUpRight, Check, Copy, Globe, Mail, Sun, Moon, Monitor } from "lucide-react"
 import { useRef, useState, useSyncExternalStore } from "react"
 import Image from "next/image"
 import { useTheme } from "next-themes"
@@ -178,7 +178,7 @@ export default function Page() {
             <div className="mt-5 text-sm text-muted-foreground">
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                 <span className="flex items-center gap-1.5">
-                  <MapPin className="size-3.5" />
+                  <Globe className="size-3.5" />
                   Remote
                 </span>
               </div>
@@ -327,24 +327,30 @@ export default function Page() {
               </h2>
               <Squiggle />
             </div>
-            <div className="mt-6 -mx-4 space-y-1">
+            <div className="mt-6 space-y-5">
               {PROJECTS.map((p) => (
                 <a
                   key={p.name}
                   href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-start gap-4 rounded-2xl px-4 py-3 transition-colors duration-200 hover:bg-muted/60"
+                  className="group block"
                 >
-                  <span className="min-w-0">
-                    <span className="block text-base font-medium transition-colors duration-200 group-hover:text-orange-500">
-                      {p.name}
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="relative">
+                      <span className="transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-orange-500">
+                        {p.name}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="absolute -bottom-0.5 left-0 h-px w-full origin-center scale-x-0 bg-orange-500/70 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100 motion-reduce:transition-none"
+                      />
                     </span>
-                    <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
-                      {p.desc}
-                    </span>
+                    <ArrowUpRight className="size-4 shrink-0 self-center -translate-x-1 text-orange-500 opacity-0 transition-[opacity,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0 [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:transition-none" />
                   </span>
-                  <ArrowUpRight className="mt-1 ml-auto size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity duration-200 group-hover:text-orange-500 group-hover:opacity-100" />
+                  <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {p.desc}
+                  </span>
                 </a>
               ))}
             </div>
