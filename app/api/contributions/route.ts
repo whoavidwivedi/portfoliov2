@@ -27,6 +27,25 @@ function levelForCount(count: number) {
   return 4
 }
 
+// GitHub's contribution calendar lags real activity by hours. The Events API
+// is realtime, so patch today's cell so fresh commits show immediately.
+const TODAY = new Date().toISOString().slice(0, 10)
+
+function patchRealtimeToday(days: ApiDay[], realtimeCount: number): ApiDay[] {
+  if (realtimeCount <= 0) return days
+
+  const index = days.findIndex((d) => d.date === TODAY)
+  if (index >= 0) {
+    const day = days[index]
+    const count = Math.max(day.count, realtimeCount)
+    const patched = days.slice()
+    patched[index] = { ...day, count, level: levelForCount(count) }
+    return patched
+  }
+
+  return [...days, { date: TODAY, count: realtimeCount, level: levelForCount(realtimeCount) }]
+}
+
 // GitHub renders the contribution graph on its own profile partial
 // (https://github.com/users/<user>/contributions). Each day is a td with
 // data-date/data-level plus a <tool-tip> carrying the exact count. This is
@@ -69,6 +88,7 @@ export async function GET() {
     })
 
     const reposByDate: Record<string, string[]> = {}
+    let realtimeToday = 0
     if (eventsRes.ok) {
       const events = await eventsRes.json()
       for (const event of events) {
@@ -83,6 +103,19 @@ export async function GET() {
             if (!reposByDate[date]) reposByDate[date] = []
             if (!reposByDate[date].includes(repo)) reposByDate[date].push(repo)
           }
+        }
+
+        if (event.created_at?.slice(0, 10) !== TODAY) continue
+        if (event.type === "PushEvent") {
+          const size = event.payload?.size
+          const count = typeof size === "number" && size > 0 ? size : event.payload?.commits?.length ?? 1
+          realtimeToday += count
+        } else if (
+          event.type === "PullRequestEvent" ||
+          event.type === "IssuesEvent" ||
+          event.type === "PullRequestReviewEvent"
+        ) {
+          realtimeToday += 1
         }
       }
     }
@@ -123,16 +156,20 @@ export async function GET() {
         if (!json.errors && json.data) {
           const calendar = json.data.user.contributionsCollection.contributionCalendar
 
-          const days = calendar.weeks.flatMap((week: GqlWeek) =>
-            week.contributionDays.map((day: GqlDay) => ({
-              date: day.date,
-              count: day.contributionCount,
-              level: levelForCount(day.contributionCount),
-            })),
+          const days = patchRealtimeToday(
+            calendar.weeks.flatMap((week: GqlWeek) =>
+              week.contributionDays.map((day: GqlDay) => ({
+                date: day.date,
+                count: day.contributionCount,
+                level: levelForCount(day.contributionCount),
+              })),
+            ),
+            realtimeToday,
           )
+          const totalCount = days.reduce((sum, day) => sum + day.count, 0)
 
           return NextResponse.json({
-            totalCount: calendar.totalContributions,
+            totalCount,
             days,
             reposByDate,
           })
@@ -148,7 +185,7 @@ export async function GET() {
 
     if (fragmentRes.ok) {
       const fragment = await fragmentRes.text()
-      const days = parseContributionsFragment(fragment)
+      const days = patchRealtimeToday(parseContributionsFragment(fragment), realtimeToday)
       const totalCount = days.reduce((sum, day) => sum + day.count, 0)
 
       if (days.length) {
@@ -156,7 +193,12 @@ export async function GET() {
       }
     }
 
-    return NextResponse.json({ totalCount: 0, days: [], reposByDate })
+    const realtimeDays = realtimeToday > 0
+      ? [{ date: TODAY, count: realtimeToday, level: levelForCount(realtimeToday) }]
+      : []
+    const fallbackTotal = realtimeDays.reduce((sum, day) => sum + day.count, 0)
+
+    return NextResponse.json({ totalCount: fallbackTotal, days: realtimeDays, reposByDate })
   } catch {
     return NextResponse.json({ totalCount: 0, days: [], reposByDate: {} }, { status: 500 })
   }
