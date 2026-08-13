@@ -1,6 +1,6 @@
 "use client"
 
-import { Copy, Mail, Sun, Moon, Monitor, MapPin } from "lucide-react"
+import { ArrowUpRight, Copy, Mail, Sun, Moon, Monitor, MapPin } from "lucide-react"
 import { useState, useSyncExternalStore } from "react"
 import Image from "next/image"
 import { useTheme } from "next-themes"
@@ -38,6 +38,21 @@ type Project = {
   desc: string
   link?: string
 }
+
+const SKILLS = [
+  {
+    category: "Languages",
+    skills: ["C++", "JavaScript", "TypeScript"],
+  },
+  {
+    category: "Frameworks",
+    skills: ["React", "Next.js", "Node.js"],
+  },
+  {
+    category: "Tools",
+    skills: ["Git", "GitHub"],
+  },
+]
 
 const PROJECTS: Project[] = [
   {
@@ -83,43 +98,37 @@ export default function Page() {
     <div className="size-full">
       <div className="fixed inset-0 -z-10 dot-grid" />
       <div className="mx-auto max-w-2xl px-6 py-24">
-        <Tooltip>
-          <DropdownMenu>
-            <TooltipTrigger
-              render={
-                <DropdownMenuTrigger
-                  render={
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label="Toggle theme"
-                      className="fixed top-6 right-6 z-50 rounded-full"
-                    >
-                      {mounted ? (
-                        <ActiveThemeIcon theme={activeTheme} className="size-4" />
-                      ) : (
-                        <div className="size-4" />
-                      )}
-                    </Button>
-                  }
-                />
-              }
-            />
-            <DropdownMenuContent align="end">
-              <DropdownMenuRadioGroup
-                value={activeTheme}
-                onValueChange={(v) => setTheme(v as ThemeKey)}
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            render={
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Toggle theme"
+                className="fixed top-6 right-6 z-50 rounded-full"
               >
-                {THEME_OPTIONS.map(({ key, label, icon: Icon }) => (
-                  <DropdownMenuRadioItem key={key} value={key}>
-                    <Icon />
-                    {label}
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </Tooltip>
+                {mounted ? (
+                  <ActiveThemeIcon theme={activeTheme} className="size-4" />
+                ) : (
+                  <div className="size-4" />
+                )}
+              </Button>
+            }
+          />
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              value={activeTheme}
+              onValueChange={(v) => setTheme(v as ThemeKey)}
+            >
+              {THEME_OPTIONS.map(({ key, label, icon: Icon }) => (
+                <DropdownMenuRadioItem key={key} value={key}>
+                  <Icon />
+                  {label}
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <div>
           <div className="relative mb-20">
             <Image
@@ -309,21 +318,25 @@ export default function Page() {
               </h2>
               <Squiggle />
             </div>
-            <div className="mt-6 space-y-6">
+            <div className="mt-6 -mx-4 space-y-1">
               {PROJECTS.map((p) => (
-                <div key={p.name}>
-                  <a
-                    href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base font-medium hover:text-orange-500"
-                  >
-                    {p.name}
-                  </a>
-                  <p className="mt-1 text-base text-muted-foreground">
-                    {p.desc}
-                  </p>
-                </div>
+                <a
+                  key={p.name}
+                  href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-4 rounded-2xl px-4 py-3 transition-colors duration-200 hover:bg-muted/60"
+                >
+                  <span className="min-w-0">
+                    <span className="block text-base font-medium transition-colors duration-200 group-hover:text-orange-500">
+                      {p.name}
+                    </span>
+                    <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
+                      {p.desc}
+                    </span>
+                  </span>
+                  <ArrowUpRight className="mt-1 ml-auto size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity duration-200 group-hover:text-orange-500 group-hover:opacity-100" />
+                </a>
               ))}
             </div>
           </div>
@@ -339,22 +352,25 @@ export default function Page() {
               </h2>
               <Squiggle />
             </div>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {[
-                "C",
-                "C++",
-                "Python",
-                "JavaScript",
-                "TypeScript",
-                "React",
-                "Next.js",
-                "Node.js",
-                "Git",
-                "GitHub",
-              ].map((s) => (
-                <Badge key={s} variant="secondary">
-                  {s}
-                </Badge>
+            <div className="mt-6 space-y-5">
+              {SKILLS.map((group) => (
+                <div key={group.category}>
+                  <p className="text-xs font-medium tracking-wider text-muted-foreground/80 uppercase">
+                    {group.category}
+                  </p>
+                  <div className="mt-2.5 flex flex-wrap gap-2">
+                    {group.skills.map((s) => (
+                      <Badge
+                        key={s}
+                        variant="outline"
+                        size="lg"
+                        className="transition-colors duration-200 hover:border-orange-500/60 hover:bg-orange-500/5"
+                      >
+                        {s}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
