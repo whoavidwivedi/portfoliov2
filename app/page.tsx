@@ -1,7 +1,7 @@
 "use client"
 
-import { ArrowUpRight, Copy, Mail, Sun, Moon, Monitor, MapPin } from "lucide-react"
-import { useState, useSyncExternalStore } from "react"
+import { ArrowUpRight, Check, Copy, Mail, Sun, Moon, Monitor, MapPin } from "lucide-react"
+import { useRef, useState, useSyncExternalStore } from "react"
 import Image from "next/image"
 import { useTheme } from "next-themes"
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
@@ -84,6 +84,14 @@ const PROJECTS: Project[] = [
 
 export default function Page() {
   const [copied, setCopied] = useState(false)
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("theavidwivedi@gmail.com")
+    setCopied(true)
+    clearTimeout(copyTimer.current)
+    copyTimer.current = setTimeout(() => setCopied(false), 1500)
+  }
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -102,10 +110,10 @@ export default function Page() {
           <DropdownMenuTrigger
             render={
               <Button
-                variant="ghost"
+                variant="outline"
                 size="icon"
                 aria-label="Toggle theme"
-                className="fixed top-6 right-6 z-50 rounded-full"
+                className="fixed top-6 right-6 z-50 transition-colors duration-200 hover:border-orange-500/60 hover:bg-orange-500/5 hover:text-orange-500"
               >
                 {mounted ? (
                   <ActiveThemeIcon theme={activeTheme} className="size-4" />
@@ -143,7 +151,7 @@ export default function Page() {
               Avi Dwivedi{" "}
               <Button
                 variant="outline"
-                size="sm"
+                size="lg"
                 nativeButton={false}
                 className="align-middle rounded-full"
                 render={
@@ -186,21 +194,22 @@ export default function Page() {
                   <TooltipTrigger
                     render={
                       <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => {
-                          navigator.clipboard.writeText("theavidwivedi@gmail.com")
-                          setCopied(true)
-                          setTimeout(() => setCopied(false), 1500)
-                        }}
-                        aria-label="Copy email"
+                        variant="outline"
+                        size="icon"
+                        onClick={copyEmail}
+                        aria-label={copied ? "Email copied" : "Copy email"}
+                        className={
+                          "transition-colors duration-200" +
+                          (copied
+                            ? " border-orange-500/60 bg-orange-500/5 text-orange-500"
+                            : " hover:border-orange-500/60 hover:bg-orange-500/5 hover:text-orange-500")
+                        }
                       >
-                        <Copy />
-                        {copied ? "copied!" : "copy"}
+                        {copied ? <Check /> : <Copy />}
                       </Button>
                     }
                   />
-                  <TooltipContent>Copy email</TooltipContent>
+                  <TooltipContent>{copied ? "Email copied!" : "Copy email"}</TooltipContent>
                 </Tooltip>
               </div>
               <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -209,7 +218,7 @@ export default function Page() {
                     render={
                       <Button
                         variant="outline"
-                        size="icon-sm"
+                        size="icon"
                         nativeButton={false}
                         className="text-foreground/80 shadow-none [&_svg:not([class*='size-'])]:size-4"
                         render={
@@ -234,7 +243,7 @@ export default function Page() {
                     render={
                       <Button
                         variant="outline"
-                        size="icon-sm"
+                        size="icon"
                         nativeButton={false}
                         className="text-foreground/80 shadow-none [&_svg:not([class*='size-'])]:size-4"
                         render={
@@ -259,7 +268,7 @@ export default function Page() {
                     render={
                       <Button
                         variant="outline"
-                        size="icon-sm"
+                        size="icon"
                         nativeButton={false}
                         className="text-foreground/80 shadow-none [&_svg:not([class*='size-'])]:size-4"
                         render={
@@ -384,7 +393,7 @@ export default function Page() {
                     render={
                       <Button
                         variant="outline"
-                        size="icon-sm"
+                        size="icon"
                         nativeButton={false}
                         className="text-foreground/80 shadow-none [&_svg:not([class*='size-'])]:size-4"
                         render={
@@ -409,7 +418,7 @@ export default function Page() {
                     render={
                       <Button
                         variant="outline"
-                        size="icon-sm"
+                        size="icon"
                         nativeButton={false}
                         className="text-foreground/80 shadow-none [&_svg:not([class*='size-'])]:size-4"
                         render={
@@ -434,7 +443,7 @@ export default function Page() {
                     render={
                       <Button
                         variant="outline"
-                        size="icon-sm"
+                        size="icon"
                         nativeButton={false}
                         className="text-foreground/80 shadow-none [&_svg:not([class*='size-'])]:size-4"
                         render={
