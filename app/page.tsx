@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpRight, Check, Copy, Globe, Mail, Sun, Moon, Monitor } from "lucide-react"
+import { Check, Copy, Globe, Mail, Sun, Moon, Monitor } from "lucide-react"
 import { useRef, useState, useSyncExternalStore } from "react"
 import Image from "next/image"
 import { useTheme } from "next-themes"
@@ -15,6 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import GitHubActivity from "@/components/ui/github-activity"
+import { LiveClock } from "@/components/ui/live-clock"
 
 function Squiggle() {
   return <div className="h-px w-full bg-orange-300 dark:bg-orange-600" />
@@ -346,7 +347,6 @@ export default function Page() {
                         className="absolute -bottom-0.5 left-0 h-px w-full origin-center scale-x-0 bg-orange-500/70 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100 motion-reduce:transition-none"
                       />
                     </span>
-                    <ArrowUpRight className="size-4 shrink-0 self-center -translate-x-1 text-orange-500 opacity-0 transition-[opacity,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0 [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:transition-none" />
                   </span>
                   <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
                     {p.desc}
@@ -470,6 +470,9 @@ export default function Page() {
                   <TooltipContent>X (@whoavidwivedi)</TooltipContent>
                 </Tooltip>
               </div>
+            </div>
+            <div className="mt-6">
+              <LiveClock />
             </div>
           </div>
         </div>
