@@ -18,7 +18,7 @@ import GitHubActivity from "@/components/ui/github-activity"
 import { LiveClock } from "@/components/ui/live-clock"
 
 function Squiggle() {
-  return <div className="h-px w-full bg-orange-300 dark:bg-orange-600" />
+  return <div className="h-px w-full bg-emerald-300 dark:bg-emerald-600" />
 }
 
 const THEME_OPTIONS = [
@@ -114,7 +114,7 @@ export default function Page() {
                 variant="outline"
                 size="icon"
                 aria-label="Toggle theme"
-                className="fixed top-6 right-6 z-50 transition-colors duration-200 hover:border-orange-500/60 hover:bg-orange-500/5 hover:text-orange-500"
+                className="fixed top-6 right-6 z-50 transition-colors duration-200 hover:border-emerald-500/60 hover:bg-emerald-500/5 hover:text-emerald-500"
               >
                 {mounted ? (
                   <ActiveThemeIcon theme={activeTheme} className="size-4" />
@@ -154,7 +154,7 @@ export default function Page() {
                 variant="outline"
                 size="sm"
                 nativeButton={false}
-                className="align-middle rounded-full uppercase tracking-wide transition-colors duration-200 hover:border-orange-500/60 hover:bg-orange-500/5 hover:text-orange-500"
+                className="align-middle rounded-full uppercase tracking-wide transition-colors duration-200 hover:border-emerald-500/60 hover:bg-emerald-500/5 hover:text-emerald-500"
                 render={
                   <a
                     href="https://drive.google.com/file/d/11X4aurZIyXi59lym2Fs8QQwaojPnNe7X/view"
@@ -186,7 +186,7 @@ export default function Page() {
               <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-2">
                 <a
                   href="mailto:theavidwivedi@gmail.com"
-                  className="flex items-center gap-1.5 hover:text-orange-500"
+                  className="flex items-center gap-1.5 hover:text-emerald-500"
                 >
                   <Mail className="size-3.5" />
                   theavidwivedi@gmail.com
@@ -202,8 +202,8 @@ export default function Page() {
                         className={
                           "transition-colors duration-200" +
                           (copied
-                            ? " border-orange-500/60 bg-orange-500/5 text-orange-500"
-                            : " hover:border-orange-500/60 hover:bg-orange-500/5 hover:text-orange-500")
+                            ? " border-emerald-500/60 bg-emerald-500/5 text-emerald-500"
+                            : " hover:border-emerald-500/60 hover:bg-emerald-500/5 hover:text-emerald-500")
                         }
                       >
                         {copied ? <Check /> : <Copy />}
@@ -339,12 +339,12 @@ export default function Page() {
                 >
                   <span className="inline-flex items-center gap-1.5">
                     <span className="relative">
-                      <span className="transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-orange-500">
+                      <span className="transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-emerald-500">
                         {p.name}
                       </span>
                       <span
                         aria-hidden="true"
-                        className="absolute -bottom-0.5 left-0 h-px w-full origin-center scale-x-0 bg-orange-500/70 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100 motion-reduce:transition-none"
+                        className="absolute -bottom-0.5 left-0 h-px w-full origin-center scale-x-0 bg-emerald-500/70 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100 motion-reduce:transition-none"
                       />
                     </span>
                   </span>
@@ -379,7 +379,7 @@ export default function Page() {
                         key={s}
                         variant="outline"
                         size="lg"
-                        className="transition-colors duration-200 hover:border-orange-500/60 hover:bg-orange-500/5"
+                        className="transition-colors duration-200 hover:border-emerald-500/60 hover:bg-emerald-500/5"
                       >
                         {s}
                       </Badge>
