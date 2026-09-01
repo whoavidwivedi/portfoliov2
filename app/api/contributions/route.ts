@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-export const revalidate = 3600 // Cache for 1 hour
+export const dynamic = "force-dynamic"
 
 const USERNAME = "whoavidwivedi"
 
@@ -84,7 +84,7 @@ export async function GET() {
   try {
     const eventsRes = await fetch(`https://api.github.com/users/${USERNAME}/events?per_page=100`, {
       headers: { Accept: "application/vnd.github.v3+json", "User-Agent": userAgent },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     })
 
     const reposByDate: Record<string, string[]> = {}
@@ -148,7 +148,7 @@ export async function GET() {
           "User-Agent": userAgent,
         },
         body: JSON.stringify({ query, variables: { username: USERNAME } }),
-        next: { revalidate: 3600 },
+        cache: "no-store",
       })
 
       if (gqlRes.ok) {
@@ -180,7 +180,7 @@ export async function GET() {
     // Otherwise read GitHub's own realtime contribution calendar partial.
     const fragmentRes = await fetch(`https://github.com/users/${USERNAME}/contributions`, {
       headers: { "User-Agent": userAgent },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     })
 
     if (fragmentRes.ok) {
