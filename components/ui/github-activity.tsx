@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export type ContributionLevel = 0 | 1 | 2 | 3 | 4;
@@ -32,12 +31,7 @@ const useIsoLayoutEffect =
 
 const TOOLTIP_EDGE = 8;
 
-const POP_EASE = [0.23, 1, 0.32, 1] as [number, number, number, number];
-const POP_TRANSITION = { duration: 0.26, ease: POP_EASE };
-const HIDDEN_STATE = { opacity: 0, transform: "scale(0.7)" };
-const REVEAL_BUDGET_MS = 2400;
-const REVEAL_STEP_MIN_MS = 10;
-const REVEAL_STEP_MAX_MS = 90;
+
 
 const LEVELS = [0, 1, 2, 3, 4] as const;
 
@@ -99,7 +93,7 @@ function describeDay({ count, date }: Contribution) {
 type ApiDay = { date: string; count: number; level: number };
 
 async function fetchCalendar() {
-  const res = await fetch("/api/contributions", { cache: "no-store" });
+  const res = await fetch("/api/contributions");
   if (!res.ok) return null;
 
   const payload = (await res.json()) as { days?: ApiDay[] } | null;
@@ -251,52 +245,6 @@ const ContributionGrid = ({
   const [ref, columns] = useFittedColumns(cellSize, gap);
   const [hovered, setHovered] = React.useState<HoveredDay>();
 
-  const prefersReducedMotion = useReducedMotion() === true;
-  const [revealed, setRevealed] = React.useState<ReadonlySet<string>>(
-    () => new Set(),
-  );
-
-  const contributionDates = React.useMemo(
-    () =>
-      weeks
-        .flat()
-        .filter((day) => day.level > 0)
-        .map((day) => day.date),
-    [weeks],
-  );
-
-  React.useEffect(() => {
-    if (prefersReducedMotion) return;
-    if (!contributionDates.length) return;
-
-    const queue = [...contributionDates];
-    for (let i = queue.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [queue[i], queue[j]] = [queue[j], queue[i]];
-    }
-
-    let index = 0;
-    const step = Math.min(
-      REVEAL_STEP_MAX_MS,
-      Math.max(REVEAL_STEP_MIN_MS, REVEAL_BUDGET_MS / queue.length),
-    );
-
-    const id = window.setInterval(() => {
-      if (index >= queue.length) {
-        window.clearInterval(id);
-        return;
-      }
-      setRevealed((prev) => {
-        const next = new Set(prev);
-        next.add(queue[index]);
-        return next;
-      });
-      index += 1;
-    }, step);
-
-    return () => window.clearInterval(id);
-  }, [contributionDates, prefersReducedMotion]);
-
   const cap = Math.min(weeks.length, weeksFor(months));
   const visible = weeks.slice(-Math.min(cap, columns ?? cap));
 
@@ -347,24 +295,10 @@ const ContributionGrid = ({
                   className="shrink-0 rounded-[3px] bg-foreground/[0.08]"
                   style={{ width: cellSize, height: cellSize }}
                 >
-                  {day.level > 0 ? (
-                    <motion.div
-                      initial={false}
-                      className="h-full w-full rounded-[3px]"
-                      animate={
-                        prefersReducedMotion || revealed.has(day.date)
-                          ? { opacity: style.opacity, transform: "scale(1)" }
-                          : HIDDEN_STATE
-                      }
-                      transition={POP_TRANSITION}
-                      style={{ backgroundColor: style.backgroundColor }}
-                    />
-                  ) : (
-                    <div
-                      className="h-full w-full rounded-[3px]"
-                      style={style}
-                    />
-                  )}
+                  <div
+                    className="h-full w-full rounded-[3px]"
+                    style={style}
+                  />
                 </div>
               );
             })}
