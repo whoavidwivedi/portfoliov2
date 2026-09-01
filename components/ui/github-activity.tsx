@@ -93,7 +93,7 @@ function describeDay({ count, date }: Contribution) {
 type ApiDay = { date: string; count: number; level: number };
 
 async function fetchCalendar() {
-  const res = await fetch("/api/contributions");
+  const res = await fetch("/api/contributions", { cache: "no-store" });
   if (!res.ok) return null;
 
   const payload = (await res.json()) as { days?: ApiDay[] } | null;
