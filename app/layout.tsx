@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   title: "Avi Dwivedi",
   description:
     "Portfolio of Avi Dwivedi — software developer, educator, and builder. I write code, teach people, and build in public.",
-  metadataBase: new URL("https://whoavidwivedi.vercel.app"),
+  metadataBase: new URL("https://whoavidwivedi.work"),
   openGraph: {
     title: "Avi Dwivedi",
     description:
       "Portfolio of Avi Dwivedi — software developer, educator, and builder. I write code, teach people, and build in public.",
     siteName: "Avi Dwivedi",
-    url: "https://whoavidwivedi.vercel.app",
+    url: "https://whoavidwivedi.work",
     type: "website",
     locale: "en_US",
   },
