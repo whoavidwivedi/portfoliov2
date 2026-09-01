@@ -104,8 +104,8 @@ export default function Page() {
     theme === "system" || theme === "light" || theme === "dark" ? theme : "system"
 
   return (
-    <div className="size-full">
-      <div className="fixed inset-0 -z-10 dot-grid" />
+    <main className="size-full">
+      <div className="fixed inset-0 -z-10 dot-grid" aria-hidden="true" />
       <div className="mx-auto max-w-2xl px-6 py-24">
         <DropdownMenu>
           <DropdownMenuTrigger
@@ -139,7 +139,7 @@ export default function Page() {
           </DropdownMenuContent>
         </DropdownMenu>
         <div>
-          <div className="relative mb-20">
+          <header className="relative mb-20">
             <Image
               src="https://avatars.githubusercontent.com/u/85203267?v=4"
               alt="Avi Dwivedi"
@@ -291,9 +291,9 @@ export default function Page() {
                 </Tooltip>
               </div>
             </div>
-          </div>
+          </header>
 
-          <div className="mb-20">
+          <section className="mb-20">
             <div className="w-fit">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Experience
@@ -319,9 +319,9 @@ export default function Page() {
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className="mb-20">
+          <section className="mb-20">
             <div className="w-fit">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Projects
@@ -354,13 +354,13 @@ export default function Page() {
                 </a>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className="relative mb-20">
+          <section className="relative mb-20">
             <GitHubActivity username="whoavidwivedi" showMonths />
-          </div>
+          </section>
 
-          <div className="mb-20">
+          <section className="mb-20">
             <div className="w-fit">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Skills
@@ -388,9 +388,9 @@ export default function Page() {
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className="border-t py-8 text-sm text-muted-foreground">
+          <footer className="border-t py-8 text-sm text-muted-foreground">
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <p>&copy; 2026 Avi Dwivedi.</p>
               <div className="flex items-center gap-2">
@@ -474,9 +474,9 @@ export default function Page() {
             <div className="mt-6">
               <LiveClock />
             </div>
-          </div>
+          </footer>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
