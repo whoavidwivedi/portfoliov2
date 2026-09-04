@@ -43,19 +43,15 @@ type Project = {
 const SKILLS = [
   {
     category: "Languages",
-    skills: ["C++", "Go", "HTML/CSS", "Java", "JavaScript", "TypeScript"],
+    skills: ["C++", "JavaScript", "TypeScript"],
   },
   {
-    category: "Frameworks & Libraries",
-    skills: ["Framer Motion", "Next.js", "Node.js", "React", "Tailwind CSS"],
+    category: "Frameworks",
+    skills: ["React", "Next.js", "Node.js"],
   },
   {
-    category: "Databases & Backend",
-    skills: ["PostgreSQL", "Supabase"],
-  },
-  {
-    category: "Tools & Platforms",
-    skills: ["Git", "GitHub", "Postman", "Vercel"],
+    category: "Tools",
+    skills: ["Git", "GitHub"],
   },
 ]
 
@@ -143,7 +139,7 @@ export default function Page() {
           </DropdownMenuContent>
         </DropdownMenu>
         <div>
-          <header id="about" className="relative mb-20">
+          <header className="relative mb-20">
             <Image
               src="https://avatars.githubusercontent.com/u/85203267?v=4"
               alt="Avi Dwivedi"
@@ -297,7 +293,7 @@ export default function Page() {
             </div>
           </header>
 
-          <section id="experience" className="mb-20">
+          <section className="mb-20">
             <div className="w-fit">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Experience
@@ -325,7 +321,7 @@ export default function Page() {
             </div>
           </section>
 
-          <section id="projects" className="mb-20">
+          <section className="mb-20">
             <div className="w-fit">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Projects
@@ -360,11 +356,11 @@ export default function Page() {
             </div>
           </section>
 
-          <section id="activity" className="relative mb-20">
+          <section className="relative mb-20">
             <GitHubActivity username="whoavidwivedi" showMonths />
           </section>
 
-          <section id="skills" className="mb-20">
+          <section className="mb-20">
             <div className="w-fit">
               <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
                 Skills
