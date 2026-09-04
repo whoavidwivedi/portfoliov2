@@ -378,7 +378,6 @@ export default function Page() {
                       <Badge
                         key={s}
                         variant="outline"
-                        size="lg"
                         className="transition-colors duration-200 hover:border-emerald-500/60 hover:bg-emerald-500/5"
                       >
                         {s}
