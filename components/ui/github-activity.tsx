@@ -27,7 +27,7 @@ export type RepoContribution = {
 
 const DEFAULT_ACCENT = "#39d353";
 const DEFAULT_CELL_SIZE = 11;
-const DEFAULT_LABEL = "Total contributions in:";
+const DEFAULT_LABEL = "Top contributions in:";
 const DEFAULT_MONTHS = 12;
 const WEEKS_PER_MONTH = 365.25 / 12 / 7;
 const STACK_LIMIT = 3;
@@ -150,9 +150,9 @@ async function fetchRepos(login: string): Promise<RepoContribution[]> {
   const counts = new Map<string, number>();
 
   for (const event of events) {
-    if (!event.repo) continue;
-    const count = event.type === "PushEvent" ? (event.payload?.commits?.length ?? 1) : 1;
-    counts.set(event.repo.name, (counts.get(event.repo.name) ?? 0) + count);
+    if (event.type !== "PushEvent" || !event.repo) continue;
+    const commits = event.payload?.commits?.length ?? 1;
+    counts.set(event.repo.name, (counts.get(event.repo.name) ?? 0) + commits);
   }
 
   return [...counts.entries()]
@@ -580,7 +580,8 @@ const GitHubActivity = ({
     <div
       data-slot="github-activity"
       className={cn(
-        "relative max-w-full overflow-hidden rounded-[28px] bg-white p-4 dark:bg-black",
+        "relative max-w-full overflow-hidden rounded-[28px] bg-white p-4 border border-neutral-200 dark:bg-black dark:border-neutral-800",
+        repos.length > 0 && "pb-[76px]",
         className,
       )}
       style={{ width, ...style }}
@@ -600,6 +601,79 @@ const GitHubActivity = ({
         reduceMotion={reduceMotion}
       />
 
+      {repos.length > 0 && (
+        <motion.div
+          layout
+          id={`${uid}-panel`}
+          data-slot="github-activity-panel"
+          data-state={open ? "open" : "closed"}
+          className={cn(
+            "absolute inset-x-3 bottom-3 overflow-hidden bg-card/90 backdrop-blur-xl",
+            open && "top-3",
+          )}
+          style={{ borderRadius: 18 }}
+          transition={transition}
+        >
+          <motion.div
+            layout="position"
+            transition={headerTransition}
+            className="flex items-center justify-between gap-3 py-3 px-4"
+          >
+            <span className="truncate text-sm text-foreground">{label}</span>
+
+            <div className="flex items-center gap-3">
+              {!open && (
+                <div className="flex items-center">
+                  {repos.slice(0, STACK_LIMIT).map((repo, index) => (
+                    <Avatar
+                      key={index}
+                      repo={repo}
+                      layoutId={`${uid}-${index}`}
+                      transition={transition}
+                      className="-ml-2 first:ml-0"
+                    />
+                  ))}
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={toggle}
+                aria-expanded={open}
+                aria-controls={`${uid}-panel`}
+                aria-label={
+                  open ? "Hide top repositories" : "Show top repositories"
+                }
+                className="grid size-7 shrink-0 place-items-center rounded-full bg-card"
+              >
+                <Chevron open={open} transition={transition} />
+              </button>
+            </div>
+          </motion.div>
+
+          <AnimatePresence initial={false} mode="popLayout">
+            {open && (
+              <motion.ul
+                key="list"
+                layout="position"
+                {...listMotion}
+                transition={rowTransition}
+                className="px-0.5 pb-1"
+              >
+                {repos.map((repo, index) => (
+                  <li key={index}>
+                    <RepoRow
+                      repo={repo}
+                      layoutId={`${uid}-${index}`}
+                      transition={transition}
+                    />
+                  </li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      )}
     </div>
   );
 };
