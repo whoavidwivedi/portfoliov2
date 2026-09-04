@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("antialiased font-sans", "font-mono", jetbrainsMono.variable)}>
+    <html lang="en" suppressHydrationWarning className={cn("antialiased font-sans", jetbrainsMono.variable)}>
       <body>
         <TooltipProvider>
           <ThemeProvider>{children}</ThemeProvider>
