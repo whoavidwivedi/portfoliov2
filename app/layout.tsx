@@ -4,6 +4,10 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { JetBrains_Mono } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 export const metadata: Metadata = {
   title: "Avi Dwivedi",
@@ -34,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="antialiased font-sans">
+    <html lang="en" suppressHydrationWarning className={cn("antialiased font-sans", "font-mono", jetbrainsMono.variable)}>
       <body>
         <TooltipProvider>
           <ThemeProvider>{children}</ThemeProvider>
