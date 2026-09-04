@@ -15,7 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import GitHubActivity from "@/components/ui/github-activity"
-import { LiveClock } from "@/components/ui/live-clock"
+
 
 function Squiggle() {
   return <div className="h-px w-full bg-emerald-300 dark:bg-emerald-600" />
@@ -473,9 +473,6 @@ export default function Page() {
                   <TooltipContent>X (@whoavidwivedi)</TooltipContent>
                 </Tooltip>
               </div>
-            </div>
-            <div className="mt-6">
-              <LiveClock />
             </div>
           </footer>
         </div>
