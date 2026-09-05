@@ -3,7 +3,7 @@
 @import "tw-animate-css";
 
 @utility dot-grid {
-  background-image: radial-gradient(circle, oklch(0.872 0.01 58.07 / 0.4) 1px, transparent 1px);
+  background-image: radial-gradient(circle, oklch(0.5 0.015 58.07 / 0.2) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -58,21 +58,21 @@
 }
 
 :root {
-  --card: oklch(1 0 0);
+  --card: oklch(0.975 0.006 58.07);
   --card-foreground: oklch(0.147 0.004 49.25);
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.975 0.006 58.07);
   --popover-foreground: oklch(0.147 0.004 49.25);
   --primary: oklch(0.555 0.163 48.998);
   --primary-foreground: oklch(0.987 0.022 95.277);
-  --secondary: oklch(0.967 0.001 286.375);
+  --secondary: oklch(0.89 0.008 58.07);
   --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.97 0.001 106.424);
-  --muted-foreground: oklch(0.553 0.013 58.071);
-  --accent: oklch(0.97 0.001 106.424);
+  --muted: oklch(0.89 0.008 58.07);
+  --muted-foreground: oklch(0.48 0.02 58.07);
+  --accent: oklch(0.89 0.008 58.07);
   --accent-foreground: oklch(0.216 0.006 56.043);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.923 0.003 48.717);
-  --input: oklch(0.923 0.003 48.717);
+  --border: oklch(0.83 0.006 58.07);
+  --input: oklch(0.83 0.006 58.07);
   --ring: oklch(0.709 0.01 56.259);
   --chart-1: oklch(0.837 0.128 66.29);
   --chart-2: oklch(0.705 0.213 47.604);
@@ -80,15 +80,15 @@
   --chart-4: oklch(0.553 0.195 38.402);
   --chart-5: oklch(0.47 0.157 37.304);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0.001 106.423);
+  --sidebar: oklch(0.955 0.006 58.07);
   --sidebar-foreground: oklch(0.147 0.004 49.25);
   --sidebar-primary: oklch(0.666 0.179 58.318);
   --sidebar-primary-foreground: oklch(0.987 0.022 95.277);
-  --sidebar-accent: oklch(0.97 0.001 106.424);
+  --sidebar-accent: oklch(0.89 0.008 58.07);
   --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
-  --sidebar-border: oklch(0.923 0.003 48.717);
+  --sidebar-border: oklch(0.83 0.006 58.07);
   --sidebar-ring: oklch(0.709 0.01 56.259);
-  --background: oklch(0.987 0 0);
+  --background: oklch(0.92 0.012 58.07);
   --foreground: oklch(0.145 0 0);
 }
 
