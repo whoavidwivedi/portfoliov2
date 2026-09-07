@@ -1,12 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "base-rhea",
+  "style": "base-mira",
   "rsc": true,
   "tsx": true,
   "tailwind": {
     "config": "",
     "css": "app/globals.css",
-    "baseColor": "stone",
+    "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
@@ -21,5 +21,7 @@
   },
   "menuColor": "default",
   "menuAccent": "subtle",
-  "registries": {}
+  "registries": {
+    "@canvas-ui": "https://canvasui.dev/r/{name}.json"
+  }
 }

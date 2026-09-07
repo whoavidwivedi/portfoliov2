@@ -87,6 +87,8 @@ const PROJECTS: Project[] = [
   },
 ]
 
+import { ParticleScroll } from "@/components/canvasui/ParticleScroll"
+
 export default function Page() {
   const [copied, setCopied] = useState(false)
   const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
@@ -108,8 +110,21 @@ export default function Page() {
     theme === "system" || theme === "light" || theme === "dark" ? theme : "system"
 
   return (
-    <main className="size-full">
-      <div className="fixed inset-0 -z-10 dot-grid" aria-hidden="true" />
+    <ParticleScroll
+      className="h-screen w-full"
+      point={0.68}
+      band={420}
+      density={2}
+      size={1.25}
+      spread={220}
+      gravity={0.35}
+      drift={0.7}
+      swirl={60}
+      stagger={0.7}
+      fade={0.85}
+      settle={1.2}
+    >
+    <main>
       <div className="mx-auto max-w-2xl px-6 py-24">
         <DropdownMenu>
           <DropdownMenuTrigger
@@ -478,5 +493,6 @@ export default function Page() {
         </div>
       </div>
     </main>
+    </ParticleScroll>
   )
 }
