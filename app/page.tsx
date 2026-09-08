@@ -109,7 +109,6 @@ export default function Page() {
 
   return (
     <main className="size-full">
-      <div className="fixed inset-0 -z-10 dot-grid" aria-hidden="true" />
       <div className="mx-auto max-w-2xl px-6 py-24">
         <DropdownMenu>
           <DropdownMenuTrigger

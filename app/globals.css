@@ -3,14 +3,6 @@
 @import "shadcn/tailwind.css";
 @import "tw-animate-css";
 
-@utility dot-grid {
-  background-image: radial-gradient(circle, oklch(0.5 0.015 58.07 / 0.2) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-.dark .dot-grid {
-  background-image: radial-gradient(circle, oklch(0.5 0.01 58.07 / 0.25) 1px, transparent 1px);
-}
 
 .caveat-scribble {
   font-family: "Caveat", cursive;
