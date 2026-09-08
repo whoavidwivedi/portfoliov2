@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Copy, Globe, Mail, Sun, Moon, Monitor } from "lucide-react"
+import { Check, Copy, Flame, Mail, Sun, Moon, Monitor } from "lucide-react"
 import { useRef, useState, useSyncExternalStore } from "react"
 import Image from "next/image"
 import { useTheme } from "next-themes"
@@ -152,7 +152,7 @@ export default function Page() {
               draggable={false}
               className="mb-5 size-14 rounded-full select-none"
             />
-<h1 className="text-4xl font-bold tracking-tight text-balance">
+            <h1 className="text-4xl font-bold tracking-tight text-balance">
               Avi Dwivedi{" "}
               <Button
                 variant="outline"
@@ -182,9 +182,23 @@ export default function Page() {
             </p>
             <div className="mt-5 text-sm text-muted-foreground">
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-                <span className="flex items-center gap-1.5">
-                  <Globe className="size-3.5" />
-                  Remote
+                <span className="flex items-center gap-2">
+                  <a href="https://monkeytype.com/profile/whoavidwivedi" target="_blank" rel="noopener noreferrer">
+                    <kbd 
+                      title="Typing speed on Monkeytype"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-b-2 border-border bg-muted/50 px-2 py-0.5 text-xs font-medium text-muted-foreground shadow-sm"
+                    >
+                      <Flame className="size-3.5 text-orange-500/80" />
+                      <span className="shimmer shimmer-color-orange-500">104 WPM</span>
+                    </kbd>
+                  </a>
+                  <div className="flex items-center pointer-events-none text-muted-foreground/80">
+                    <svg width="40" height="24" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="mr-1.5 mt-0.5">
+                      <path d="M 90,25 C 70,15 40,35 10,25" />
+                      <path d="M 25,15 C 18,20 10,25 10,25 C 10,25 20,32 25,40" />
+                    </svg>
+                    <span className="caveat-scribble text-lg sm:text-xl">monkeytype</span>
+                  </div>
                 </span>
               </div>
               <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-2">
