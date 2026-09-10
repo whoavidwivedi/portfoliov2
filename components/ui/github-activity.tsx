@@ -114,14 +114,11 @@ function describeDay({ count, date }: Contribution) {
 }
 
 const CALENDAR_API = "https://github-contributions-api.jogruber.de/v4";
-const EVENTS_API = "https://api.github.com/users";
+const GITHUB_API = "https://api.github.com";
 
 type ApiDay = { date: string; count: number; level: number };
-type PushEvent = {
-  type: string;
-  repo?: { name: string };
-  payload?: { commits?: unknown[] };
-};
+type GhRepo = { full_name: string; owner: { login: string } };
+type GhContributor = { login: string; contributions: number };
 
 async function fetchCalendar(login: string) {
   const res = await fetch(`${CALENDAR_API}/${login}?y=last`);
@@ -143,35 +140,42 @@ async function fetchCalendar(login: string) {
 }
 
 async function fetchRepos(login: string): Promise<RepoContribution[]> {
-  const res = await fetch(`${EVENTS_API}/${login}/events/public?per_page=100`);
-  if (!res.ok) return [];
+  const reposRes = await fetch(
+    `${GITHUB_API}/users/${login}/repos?per_page=100&sort=pushed&direction=desc`,
+  );
+  if (!reposRes.ok) return [];
 
-  const events: PushEvent[] = await res.json();
-  const counts = new Map<string, number>();
+  const repos: GhRepo[] = await reposRes.json();
+  const results: RepoContribution[] = [];
 
-  for (const event of events) {
-    if (event.type !== "PushEvent" || !event.repo) continue;
-    const commits = event.payload?.commits?.length ?? 1;
-    counts.set(event.repo.name, (counts.get(event.repo.name) ?? 0) + commits);
+  for (const repo of repos) {
+    const contribRes = await fetch(
+      `${GITHUB_API}/repos/${repo.full_name}/contributors`,
+    );
+    if (!contribRes.ok) continue;
+
+    const contributors: GhContributor[] = await contribRes.json();
+    const user = contributors.find(
+      (c) => c.login.toLowerCase() === login.toLowerCase(),
+    );
+    if (!user || user.contributions <= 0) continue;
+
+    const owner = repo.owner.login;
+    results.push({
+      name: repo.full_name,
+      count: user.contributions,
+      href: `https://github.com/${repo.full_name}`,
+      logo:
+        owner.toLowerCase() === login.toLowerCase() ? undefined : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={`https://github.com/${owner}.png?size=64`} alt="" />
+        ),
+    });
   }
 
-  return [...counts.entries()]
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, STACK_LIMIT)
-    .map(([fullName, count]) => {
-      const [owner, name] = fullName.split("/");
-      return {
-        name,
-        count,
-        href: `https://github.com/${fullName}`,
-        // github has no repo logo, only an owner avatar, so own repos use the initial
-        logo:
-          owner.toLowerCase() === login.toLowerCase() ? undefined : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={`https://github.com/${owner}.png?size=64`} alt="" />
-          ),
-      };
-    });
+  return results
+    .sort((a, b) => b.count - a.count)
+    .slice(0, STACK_LIMIT);
 }
 
 function useGitHubUser(login?: string) {
@@ -452,7 +456,7 @@ const RepoRow = ({
         {repo.name}
       </span>
       <span className="text-sm tabular-nums text-foreground/70">
-        {repo.count}
+        {repo.count} commits
       </span>
     </>
   );
