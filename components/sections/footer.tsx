@@ -30,7 +30,7 @@ export function Footer() {
                 />
               }
             />
-            <TooltipContent className="rounded-xl shadow-lg border-border/50 bg-background/90 backdrop-blur-md">GitHub (@whoavidwivedi)</TooltipContent>
+            <TooltipContent>GitHub (@whoavidwivedi)</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger
@@ -55,7 +55,7 @@ export function Footer() {
                 />
               }
             />
-            <TooltipContent className="rounded-xl shadow-lg border-border/50 bg-background/90 backdrop-blur-md">LinkedIn (@whoavidwivedi)</TooltipContent>
+            <TooltipContent>LinkedIn (@whoavidwivedi)</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger
@@ -80,7 +80,7 @@ export function Footer() {
                 />
               }
             />
-            <TooltipContent className="rounded-xl shadow-lg border-border/50 bg-background/90 backdrop-blur-md">X (@whoavidwivedi)</TooltipContent>
+            <TooltipContent>X (@whoavidwivedi)</TooltipContent>
           </Tooltip>
         </div>
       </div>

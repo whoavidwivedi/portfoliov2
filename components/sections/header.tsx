@@ -104,7 +104,7 @@ export function Header() {
                 </Button>
               }
             />
-            <TooltipContent className="rounded-xl shadow-lg border-border/50 bg-background/90 backdrop-blur-md">
+            <TooltipContent>
               {copied ? "Email copied!" : "Copy email"}
             </TooltipContent>
           </Tooltip>
