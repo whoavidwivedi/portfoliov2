@@ -19,16 +19,16 @@ export function Projects() {
             rel="noopener noreferrer"
             className="group block relative"
           >
-            <div className="absolute -inset-x-4 -inset-y-3 z-0 hidden rounded-xl transition motion-reduce:transition-none lg:block lg:group-hover:bg-muted/40 lg:group-hover:drop-shadow-sm" />
+            <div className="absolute -inset-x-4 -inset-y-3 z-0 hidden rounded-xl lg:block" />
             <div className="relative z-10">
               <span className="inline-flex items-center gap-1.5 font-semibold">
                 <span className="relative">
-                  <span className="transition-colors duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-emerald-500 text-foreground">
+                  <span className="[@media(hover:hover)_and_(pointer:fine)]:group-hover:text-emerald-500 text-foreground">
                     {p.name}
                   </span>
                   <span
                     aria-hidden="true"
-                    className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-center scale-x-0 bg-emerald-500/70 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100 motion-reduce:transition-none"
+                    className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-center scale-x-0 bg-emerald-500/70 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100"
                   />
                 </span>
               </span>
