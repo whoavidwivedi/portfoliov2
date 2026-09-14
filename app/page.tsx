@@ -30,7 +30,7 @@ export default function Page() {
           </div>
 
           <div className="my-20 flex justify-center w-full">
-            <GitHubActivity username="whoavidwivedi" />
+            <GitHubActivity username="whoavidwivedi" showMonths />
           </div>
           
           <div>
