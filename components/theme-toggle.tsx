@@ -54,19 +54,9 @@ export function ThemeToggle() {
           onValueChange={(v) => setTheme(v as ThemeKey)}
         >
           {THEME_OPTIONS.map(({ key, label, icon: Icon }) => (
-            <DropdownMenuRadioItem key={key} value={key} className="group rounded-xl cursor-pointer">
-              <span className="relative inline-flex items-center">
-                <Icon className="size-4 mr-2" />
-                <span className="relative font-semibold">
-                  <span className="[@media(hover:hover)_and_(pointer:fine)]:group-focus:text-emerald-500 [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-emerald-500 text-foreground transition-colors">
-                    {label}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-center scale-x-0 bg-emerald-500/70 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-focus:scale-x-100 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100"
-                  />
-                </span>
-              </span>
+            <DropdownMenuRadioItem key={key} value={key} className="rounded-xl cursor-pointer text-foreground/80 focus:text-foreground">
+              <Icon className="size-4 mr-2" />
+              {label}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>

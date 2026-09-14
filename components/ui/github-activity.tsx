@@ -124,10 +124,11 @@ type PushEvent = {
 };
 
 async function fetchCalendar(login: string) {
-  const res = await fetch(`${CALENDAR_API}/${login}?y=last`);
+  const res = await fetch(`/api/contributions`);
   if (!res.ok) return null;
 
-  const days: ApiDay[] = (await res.json())?.contributions ?? [];
+  const data = await res.json();
+  const days: ApiDay[] = data?.days ?? [];
   if (!days.length) return null;
 
   // columns are weeks, so the first day has to be a sunday or every column shears
