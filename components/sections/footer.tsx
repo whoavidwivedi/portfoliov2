@@ -14,7 +14,7 @@ export function Footer() {
                   variant="outline"
                   size="icon"
                   nativeButton={false}
-                  className="text-foreground/80 shadow-sm bg-background/50 backdrop-blur-sm rounded-full transition-all duration-300 hover:border-emerald-500/60 hover:bg-emerald-500/10 hover:text-emerald-500 hover:scale-110 active:scale-95 [&_svg:not([class*='size-'])]:size-4"
+                  className="text-foreground/80 [&_svg:not([class*='size-'])]:size-4"
                   render={
                     <a
                       href="https://github.com/whoavidwivedi"
@@ -30,7 +30,7 @@ export function Footer() {
                 />
               }
             />
-            <TooltipContent>GitHub (@whoavidwivedi)</TooltipContent>
+            <TooltipContent>@whoavidwivedi</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger
@@ -39,7 +39,7 @@ export function Footer() {
                   variant="outline"
                   size="icon"
                   nativeButton={false}
-                  className="text-foreground/80 shadow-sm bg-background/50 backdrop-blur-sm rounded-full transition-all duration-300 hover:border-emerald-500/60 hover:bg-emerald-500/10 hover:text-emerald-500 hover:scale-110 active:scale-95 [&_svg:not([class*='size-'])]:size-4"
+                  className="text-foreground/80 [&_svg:not([class*='size-'])]:size-4"
                   render={
                     <a
                       href="https://linkedin.com/in/whoavidwivedi"
@@ -55,7 +55,7 @@ export function Footer() {
                 />
               }
             />
-            <TooltipContent>LinkedIn (@whoavidwivedi)</TooltipContent>
+            <TooltipContent>@whoavidwivedi</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger
@@ -64,7 +64,7 @@ export function Footer() {
                   variant="outline"
                   size="icon"
                   nativeButton={false}
-                  className="text-foreground/80 shadow-sm bg-background/50 backdrop-blur-sm rounded-full transition-all duration-300 hover:border-emerald-500/60 hover:bg-emerald-500/10 hover:text-emerald-500 hover:scale-110 active:scale-95 [&_svg:not([class*='size-'])]:size-4"
+                  className="text-foreground/80 [&_svg:not([class*='size-'])]:size-4"
                   render={
                     <a
                       href="https://x.com/whoavidwivedi"
@@ -80,7 +80,7 @@ export function Footer() {
                 />
               }
             />
-            <TooltipContent>X (@whoavidwivedi)</TooltipContent>
+            <TooltipContent>@whoavidwivedi</TooltipContent>
           </Tooltip>
         </div>
       </div>

@@ -26,7 +26,7 @@ export function Header() {
         width={56}
         height={56}
         draggable={false}
-        className="mb-6 size-14 rounded-full select-none shadow-sm ring-1 ring-border/50"
+        className="mb-6 size-14 rounded-full select-none ring-1 ring-border/50"
       />
       <h1 className="text-4xl font-bold tracking-tight text-balance">
         Avi Dwivedi{" "}
@@ -34,7 +34,7 @@ export function Header() {
           variant="outline"
           size="sm"
           nativeButton={false}
-          className="align-middle rounded-full uppercase tracking-wide transition-all duration-300 hover:border-emerald-500/60 hover:bg-emerald-500/10 hover:text-emerald-500 hover:-translate-y-0.5 ml-2"
+          className="align-middle uppercase tracking-wide ml-2"
           render={
             <a
               href="https://drive.google.com/file/d/11X4aurZIyXi59lym2Fs8QQwaojPnNe7X/view"
@@ -59,12 +59,12 @@ export function Header() {
       <div className="mt-6 text-sm text-muted-foreground">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <span className="flex items-center gap-2">
-            <a href="https://monkeytype.com/profile/whoavidwivedi" target="_blank" rel="noopener noreferrer" className="transition-transform duration-200 hover:scale-105 active:scale-95 block">
+            <a href="https://monkeytype.com/profile/whoavidwivedi" target="_blank" rel="noopener noreferrer" className="block">
               <kbd 
                 title="Typing speed on Monkeytype"
-                className="inline-flex items-center gap-1.5 rounded-md border border-b-2 border-border bg-muted/50 px-2 py-0.5 text-xs font-medium text-muted-foreground shadow-sm"
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2 py-0.5 text-xs font-medium text-muted-foreground transition duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
               >
-                <Flame className="size-3.5 text-orange-500/80 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)]" />
+                <Flame className="size-3.5 text-orange-500/80" />
                 <span className="shimmer shimmer-color-orange-500">104 WPM</span>
               </kbd>
             </a>
@@ -80,7 +80,7 @@ export function Header() {
         <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-3">
           <a
             href="mailto:theavidwivedi@gmail.com"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/30 border border-border/50 hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:text-emerald-500 transition-all duration-300"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-muted/30 border border-border/50 hover:bg-muted/50 transition duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
           >
             <Mail className="size-3.5" />
             theavidwivedi@gmail.com
@@ -94,17 +94,28 @@ export function Header() {
                   onClick={copyEmail}
                   aria-label={copied ? "Email copied" : "Copy email"}
                   className={
-                    "transition-all duration-300 rounded-full " +
+                    "cursor-pointer " +
                     (copied
-                      ? " border-emerald-500/60 bg-emerald-500/10 text-emerald-500 scale-95"
-                      : " hover:border-emerald-500/60 hover:bg-emerald-500/10 hover:text-emerald-500 hover:scale-105 active:scale-95")
+                      ? "border-primary/60 bg-primary/10 text-primary"
+                      : "")
                   }
                 >
-                  {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+                  <div className="relative flex size-4 items-center justify-center">
+                    <Check
+                      className={`absolute size-4 transition-all duration-200 ease-out ${
+                        copied ? "scale-100 opacity-100 blur-0" : "scale-50 opacity-0 blur-sm"
+                      }`}
+                    />
+                    <Copy
+                      className={`absolute size-4 transition-all duration-200 ease-out ${
+                        copied ? "scale-50 opacity-0 blur-sm" : "scale-100 opacity-100 blur-0"
+                      }`}
+                    />
+                  </div>
                 </Button>
               }
             />
-            <TooltipContent>
+            <TooltipContent side="right">
               {copied ? "Email copied!" : "Copy email"}
             </TooltipContent>
           </Tooltip>

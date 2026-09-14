@@ -22,7 +22,7 @@ export function Skills() {
                 <Badge
                   key={s}
                   variant="outline"
-                  className="transition-all duration-300 hover:border-emerald-500/60 hover:bg-emerald-500/10 hover:text-emerald-500 hover:-translate-y-0.5 shadow-sm bg-background/50 backdrop-blur-sm"
+                  className="bg-background/50 backdrop-blur-sm"
                 >
                   {s}
                 </Badge>
