@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Check, Copy, Flame, Mail } from "lucide-react"
 
@@ -9,7 +9,17 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip
 
 export function Header() {
   const [copied, setCopied] = useState(false)
+  const [wpm, setWpm] = useState<number | null>(null)
   const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  useEffect(() => {
+    fetch("/api/wpm")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.wpm) setWpm(data.wpm)
+      })
+      .catch((err) => console.error("Failed to fetch WPM:", err))
+  }, [])
 
   const copyEmail = () => {
     navigator.clipboard.writeText("theavidwivedi@gmail.com")
@@ -65,7 +75,7 @@ export function Header() {
                 className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2 py-0.5 text-xs font-medium text-muted-foreground transition duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
               >
                 <Flame className="size-3.5 text-black/80 dark:text-white/80" />
-                <span className="shimmer shimmer-color-black dark:shimmer-color-white">104 WPM</span>
+                <span className="shimmer shimmer-color-black dark:shimmer-color-white">{wpm || 104} WPM</span>
               </kbd>
             </a>
             <div className="flex items-center pointer-events-none text-muted-foreground/80 opacity-70">
