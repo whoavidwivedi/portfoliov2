@@ -305,8 +305,8 @@ const ContributionGrid = ({
     >
       {showMonths && (
         <motion.div
-          className="flex justify-center"
-          style={{ gap, marginBottom: gap }}
+          className="flex justify-center mb-2"
+          style={{ gap }}
           initial={
             reduceMotion
               ? false
@@ -535,7 +535,7 @@ const GitHubActivity = ({
     <div
       data-slot="github-activity"
       className={cn(
-        "relative max-w-full overflow-hidden rounded-[28px] bg-white p-4 dark:bg-black",
+        "relative max-w-full overflow-hidden rounded-[28px] bg-white p-4 dark:bg-black border border-border/50",
         className,
       )}
       style={{ width, ...style }}

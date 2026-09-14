@@ -64,8 +64,8 @@ export function Header() {
                 title="Typing speed on Monkeytype"
                 className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2 py-0.5 text-xs font-medium text-muted-foreground transition duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
               >
-                <Flame className="size-3.5 text-orange-500/80" />
-                <span className="shimmer shimmer-color-orange-500">104 WPM</span>
+                <Flame className="size-3.5 text-black/80 dark:text-white/80" />
+                <span className="shimmer shimmer-color-black dark:shimmer-color-white">104 WPM</span>
               </kbd>
             </a>
             <div className="flex items-center pointer-events-none text-muted-foreground/80 opacity-70">
