@@ -1,5 +1,6 @@
 import { Squiggle } from "@/components/ui/squiggle"
 import { PROJECTS } from "@/config/data"
+import { playTactileSound } from "@/lib/sound"
 
 export function Projects() {
   return (
@@ -17,6 +18,7 @@ export function Projects() {
             href={`https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => playTactileSound("click")}
             className="group block relative"
           >
             <div className="absolute -inset-x-4 -inset-y-3 z-0 hidden rounded-xl lg:block" />

@@ -6,6 +6,7 @@ import { Check, Copy, Flame, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
+import { playTactileSound } from "@/lib/sound"
 
 export function Header() {
   const [copied, setCopied] = useState(false)
@@ -23,6 +24,7 @@ export function Header() {
 
   const copyEmail = () => {
     navigator.clipboard.writeText("theavidwivedi@gmail.com")
+    playTactileSound("pop")
     setCopied(true)
     clearTimeout(copyTimer.current)
     copyTimer.current = setTimeout(() => setCopied(false), 1500)
@@ -50,6 +52,7 @@ export function Header() {
               href="https://drive.google.com/file/d/11X4aurZIyXi59lym2Fs8QQwaojPnNe7X/view"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => playTactileSound("click")}
             >
               resume
             </a>
@@ -69,7 +72,13 @@ export function Header() {
       <div className="mt-6 text-sm text-muted-foreground">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <span className="flex items-center gap-2">
-            <a href="https://monkeytype.com/profile/whoavidwivedi" target="_blank" rel="noopener noreferrer" className="block">
+            <a
+              href="https://monkeytype.com/profile/whoavidwivedi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+              onClick={() => playTactileSound("click")}
+            >
               <kbd 
                 title="Typing speed on Monkeytype"
                 className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2 py-0.5 text-xs font-medium text-muted-foreground transition duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
