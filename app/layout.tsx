@@ -1,15 +1,17 @@
-import "@fontsource-variable/google-sans-flex"
 import type { Metadata } from "next"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { JetBrains_Mono, Public_Sans } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { Inter, JetBrains_Mono } from "next/font/google"
+import { cn } from "@/lib/utils"
 
-const publicSans = Public_Sans({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+})
 
 export const metadata: Metadata = {
   title: "Avi Dwivedi",
@@ -40,7 +42,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("antialiased font-sans", jetbrainsMono.variable, "font-sans", publicSans.variable)}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(
+        "antialiased font-sans",
+        inter.variable,
+        jetbrainsMono.variable
+      )}
+    >
       <body>
         <TooltipProvider>
           <ThemeProvider>{children}</ThemeProvider>

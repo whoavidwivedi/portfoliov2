@@ -12,6 +12,7 @@ export type Project = {
   name: string
   desc: string
   link?: string
+  href?: string
 }
 
 export const SKILLS = [
@@ -38,25 +39,12 @@ export const PROJECTS: Project[] = [
     name: "Better Space",
     desc: "High-fidelity, zero-account real-time audio spaces built with Next.js, LiveKit, and Base UI.",
     link: "space",
+    href: "https://space.whoavidwivedi.work",
   },
   {
-    name: "Gitenius",
-    desc: "AI-powered GitHub profile analyzer and developer portfolio generator.",
-  },
-  {
-    name: "pricing-section",
-    desc: "Interactive pricing section UI built with Next.js and Framer Motion.",
-  },
-  {
-    name: "Time",
-    desc: "Real-time collaborative whiteboard for conversations — no login, no database.",
-  },
-  {
-    name: "scratch-the-doubt",
-    desc: "Real-time collaborative whiteboard for learners to solve doubts together.",
-  },
-  {
-    name: "wordloom-studio",
-    desc: "Web-based studio generating short, pronounceable names from real English letter patterns.",
+    name: "Wordloom Studio",
+    desc: "Find short, pronounceable names that sound like real words.",
+    link: "wordloom-studio",
+    href: "https://wordloom-studio.whoavidwivedi.work",
   },
 ]

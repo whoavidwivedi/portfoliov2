@@ -1,6 +1,6 @@
 // Zero-dependency tactile sound synthesis using the Web Audio API.
 
-export type SoundType = "click" | "pop" | "switch"
+export type SoundType = "click" | "pop" | "switch" | "hinge"
 
 const STORAGE_KEY = "portfolio_sound_enabled"
 
@@ -140,6 +140,46 @@ export function playTactileSound(type: SoundType = "click", customVolume?: numbe
       osc1.stop(now + 0.018)
       osc2.start(now + 0.015)
       osc2.stop(now + 0.04)
+    } else if (type === "hinge") {
+      // iPhone Duo Titanium Hinge Snap (~60ms)
+      // Low mechanical body resonance + crisp titanium latch click
+      const oscLow = ctx.createOscillator()
+      const oscHigh = ctx.createOscillator()
+      const gainLow = ctx.createGain()
+      const gainHigh = ctx.createGain()
+      const filter = ctx.createBiquadFilter()
+
+      // High titanium click
+      filter.type = "highpass"
+      filter.frequency.setValueAtTime(2200, now)
+
+      oscHigh.type = "sine"
+      oscHigh.frequency.setValueAtTime(3200, now)
+      oscHigh.frequency.exponentialRampToValueAtTime(800, now + 0.025)
+
+      // Low mechanical hinge damping
+      oscLow.type = "triangle"
+      oscLow.frequency.setValueAtTime(240, now)
+      oscLow.frequency.exponentialRampToValueAtTime(70, now + 0.055)
+
+      const vol = customVolume ?? 0.16
+      gainHigh.gain.setValueAtTime(vol * 0.9, now)
+      gainHigh.gain.exponentialRampToValueAtTime(0.0001, now + 0.025)
+
+      gainLow.gain.setValueAtTime(vol * 0.7, now)
+      gainLow.gain.exponentialRampToValueAtTime(0.0001, now + 0.055)
+
+      oscHigh.connect(filter)
+      filter.connect(gainHigh)
+      gainHigh.connect(ctx.destination)
+
+      oscLow.connect(gainLow)
+      gainLow.connect(ctx.destination)
+
+      oscHigh.start(now)
+      oscHigh.stop(now + 0.03)
+      oscLow.start(now)
+      oscLow.stop(now + 0.06)
     }
   } catch {
     // Graceful silence on any unsupported browser quirks

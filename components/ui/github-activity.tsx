@@ -305,7 +305,7 @@ const ContributionGrid = ({
     >
       {showMonths && (
         <motion.div
-          className="flex justify-center mb-2"
+          className="flex justify-start sm:justify-center mb-2"
           style={{ gap }}
           initial={
             reduceMotion
@@ -325,7 +325,7 @@ const ContributionGrid = ({
               style={{ width: cellSize }}
             >
               {month && (
-                <span className="absolute left-0 top-0 text-[10px] leading-none text-foreground/40">
+                <span className="absolute left-0 top-0 text-[10px] leading-none text-foreground/40 font-mono">
                   {month}
                 </span>
               )}
@@ -335,7 +335,7 @@ const ContributionGrid = ({
       )}
 
       <div
-        className="flex justify-center overflow-hidden"
+        className="flex justify-start sm:justify-center overflow-hidden"
         style={{ gap }}
         onPointerLeave={() => setHovered(undefined)}
       >
@@ -468,6 +468,7 @@ export type GitHubActivityProps = React.ComponentProps<"div"> & {
   months?: number;
   showMonths?: boolean;
   label?: string;
+  hideHeading?: boolean;
   defaultOpen?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -483,6 +484,7 @@ const GitHubActivity = ({
   months = DEFAULT_MONTHS,
   showMonths = false,
   label = DEFAULT_LABEL,
+  hideHeading = false,
   style,
   ...props
 }: GitHubActivityProps) => {
@@ -535,15 +537,17 @@ const GitHubActivity = ({
     <div
       data-slot="github-activity"
       className={cn(
-        "relative max-w-full overflow-hidden rounded-[28px] bg-white p-4 dark:bg-black border border-border/50",
+        "relative max-w-full overflow-hidden rounded-lg",
         className,
       )}
       style={{ width, ...style }}
       {...props}
     >
-      <p className="mb-4 text-base font-medium text-foreground px-1.5">
-        {heading}
-      </p>
+      {!hideHeading && (
+        <p className="mb-3 text-xs font-mono text-muted-foreground px-0.5">
+          {heading}
+        </p>
+      )}
 
       <ContributionGrid
         contributions={contributions}

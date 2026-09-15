@@ -28,18 +28,24 @@ export async function GET() {
 
     let maxWpm = 0;
 
-    const extractMaxWpm = (data: any) => {
+    type PersonalBestsResponse = {
+      data?: Record<string, Array<{ wpm: number }>>
+    }
+
+    const extractMaxWpm = (data: PersonalBestsResponse) => {
       if (data?.data) {
         for (const key of Object.keys(data.data)) {
-          const records = data.data[key];
-          for (const record of records) {
-            if (record.wpm > maxWpm) {
-              maxWpm = record.wpm;
+          const records = data.data[key]
+          if (Array.isArray(records)) {
+            for (const record of records) {
+              if (record.wpm > maxWpm) {
+                maxWpm = record.wpm
+              }
             }
           }
         }
       }
-    };
+    }
 
     extractMaxWpm(timeData);
     extractMaxWpm(wordsData);
