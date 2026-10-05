@@ -11,6 +11,7 @@ export type ThemeKey = (typeof THEME_OPTIONS)[number]["key"]
 export type Project = {
   name: string
   desc: string
+  uiUxDesc: string
   link?: string
 }
 
@@ -36,27 +37,20 @@ export const SKILLS = [
 export const PROJECTS: Project[] = [
   {
     name: "Better Space",
-    desc: "High-fidelity, zero-account real-time audio spaces built with Next.js, LiveKit, and Base UI.",
+    desc: "Zero-account real-time audio rooms - spatial audio, hand-raise, emoji reactions.",
+    uiUxDesc: "Dark-first, emerald accents. Tactile mic toggle, reaction bursts. Spatial avatar layout. No accounts, just a link.",
     link: "space",
   },
   {
-    name: "Gitenius",
-    desc: "AI-powered GitHub profile analyzer and developer portfolio generator.",
+    name: "WordLoom Studio",
+    desc: "Brand names from English phonotactics - length slider, vibe toggles, instant results.",
+    uiUxDesc: "One screen: 4-8 chars, tech/friendly/bold. Pronunciation, domain check, copy. Local history persists.",
+    link: "wordloom-studio",
   },
   {
-    name: "pricing-section",
-    desc: "Interactive pricing section UI built with Next.js and Framer Motion.",
-  },
-  {
-    name: "Time",
-    desc: "Real-time collaborative whiteboard for conversations — no login, no database.",
-  },
-  {
-    name: "scratch-the-doubt",
-    desc: "Real-time collaborative whiteboard for learners to solve doubts together.",
-  },
-  {
-    name: "wordloom-studio",
-    desc: "Web-based studio generating short, pronounceable names from real English letter patterns.",
+    name: "Pricing Page",
+    desc: "Animated tier cards, shared usage slider, progressive feature matrix.",
+    uiUxDesc: "Spring hover, live price updates. Scroll-reveal checkmarks. Emerald CTAs, zinc base. Reduced-motion safe. 360px+.",
+    link: "pricing-section",
   },
 ]

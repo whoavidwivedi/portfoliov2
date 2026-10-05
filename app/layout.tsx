@@ -14,12 +14,12 @@ const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'})
 export const metadata: Metadata = {
   title: "Avi Dwivedi",
   description:
-    "Portfolio of Avi Dwivedi — software developer, educator, and builder. I write code, teach people, and build in public.",
+    "Portfolio of Avi Dwivedi - software developer, educator, and builder. I write code, teach people, and build in public.",
   metadataBase: new URL("https://whoavidwivedi.work"),
   openGraph: {
     title: "Avi Dwivedi",
     description:
-      "Portfolio of Avi Dwivedi — software developer, educator, and builder. I write code, teach people, and build in public.",
+      "Portfolio of Avi Dwivedi - software developer, educator, and builder. I write code, teach people, and build in public.",
     siteName: "Avi Dwivedi",
     url: "https://whoavidwivedi.work",
     type: "website",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Avi Dwivedi",
     description:
-      "Portfolio of Avi Dwivedi — software developer, educator, and builder.",
+      "Portfolio of Avi Dwivedi - software developer, educator, and builder.",
     creator: "@whoavidwivedi",
   },
 }

@@ -47,14 +47,13 @@ export function Header() {
         />
       </h1>
       <p className="mt-2 text-base text-muted-foreground text-pretty font-medium">
-        focusing &middot; ex-intern @takeUforward &middot; ex-educator
+        focusing on micro-interactions & UI/UX &middot; ex-intern @takeUforward &middot; ex-educator
         @BrightCHAMPS
       </p>
       <p className="mt-6 text-base leading-relaxed text-muted-foreground text-pretty max-w-xl">
         A developer who enjoys building useful things, teaching what I
-        know, and learning what I don&rsquo;t. I believe in simple code,
-        clear communication, and creating tools that actually make a
-        difference.
+        know, and learning what I don&rsquo;t. I craft interfaces where
+        motion, feedback, and detail feel inevitable - not decorative.
       </p>
       <div className="mt-6 text-sm text-muted-foreground">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">

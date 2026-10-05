@@ -10,7 +10,7 @@ export function Projects() {
         </h2>
         <Squiggle />
       </div>
-      <div className="mt-8 space-y-6">
+      <div className="mt-8 space-y-8">
         {PROJECTS.map((p) => (
           <a
             key={p.name}
@@ -28,13 +28,16 @@ export function Projects() {
                   </span>
                   <span
                     aria-hidden="true"
-                    className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-center scale-x-0 bg-emerald-500/70 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100"
+                    className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-center scale-x-0 bg-emerald-500/70 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100 transition-transform duration-200 ease-out"
                   />
                 </span>
               </span>
-              <span className="mt-1.5 block text-sm leading-relaxed text-muted-foreground text-pretty">
+              <p className="mt-2 block text-sm leading-relaxed text-muted-foreground text-pretty">
                 {p.desc}
-              </span>
+              </p>
+              <p className="mt-2 block text-sm leading-relaxed text-muted-foreground/70 text-pretty font-medium tracking-tight">
+                {p.uiUxDesc}
+              </p>
             </div>
           </a>
         ))}
