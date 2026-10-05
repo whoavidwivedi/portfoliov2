@@ -13,11 +13,11 @@ export function Experience() {
         {[
           {
             title: "Intern @ takeUforward",
-            period: "Sep 2025 — May 2026",
+            period: "Sep 2025 - May 2026",
           },
           {
             title: "Coding Educator @ BrightCHAMPS",
-            period: "Sep 2024 — Feb 2025",
+            period: "Sep 2024 - Feb 2025",
           },
         ].map((item) => (
           <div key={item.title} className="group relative">
