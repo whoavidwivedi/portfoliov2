@@ -14,7 +14,7 @@ export function Skills() {
       <div className="mt-8 space-y-8">
         {SKILLS.map((group) => (
           <div key={group.category} className="group">
-            <p className="text-xs font-semibold tracking-wider text-muted-foreground/80 uppercase mb-3">
+            <p className="mb-3 text-xs font-semibold tracking-wider text-muted-foreground/80 uppercase">
               {group.category}
             </p>
             <div className="flex flex-wrap gap-2.5">

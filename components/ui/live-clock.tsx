@@ -99,7 +99,10 @@ export function LiveClock() {
         {time ? (
           <span className="tabular-nums">{time} IST</span>
         ) : (
-          <span aria-hidden="true" className="tabular-nums opacity-0 select-none">
+          <span
+            aria-hidden="true"
+            className="tabular-nums opacity-0 select-none"
+          >
             12:00 PM
           </span>
         )}

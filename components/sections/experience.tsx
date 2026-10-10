@@ -23,8 +23,10 @@ export function Experience() {
           <div key={item.title} className="group relative">
             <div className="absolute -inset-x-4 -inset-y-3 z-0 hidden rounded-xl lg:block" />
             <div className="relative z-10">
-              <p className="text-base font-semibold text-foreground">{item.title}</p>
-              <p className="mt-1 text-sm text-muted-foreground font-medium">
+              <p className="text-base font-semibold text-foreground">
+                {item.title}
+              </p>
+              <p className="mt-1 text-sm font-medium text-muted-foreground">
                 {item.period}
               </p>
             </div>
