@@ -1,11 +1,17 @@
 import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip"
 
 export function Footer() {
   return (
     <footer className="border-t border-border/50 py-10 text-sm text-muted-foreground">
       <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-center">
-        <p className="font-medium">&copy; {new Date().getFullYear()} Avi Dwivedi.</p>
+        <p className="font-medium">
+          &copy; {new Date().getFullYear()} Avi Dwivedi.
+        </p>
         <div className="flex items-center gap-3">
           <Tooltip>
             <TooltipTrigger
@@ -55,7 +61,7 @@ export function Footer() {
                 />
               }
             />
-            <TooltipContent>@whoavidwivedi</TooltipContent>
+            <TooltipContent>in/whoavidwivedi</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger

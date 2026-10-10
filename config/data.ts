@@ -1,56 +1,69 @@
-import { Sun, Moon, Monitor } from "lucide-react"
-
-export const THEME_OPTIONS = [
-  { key: "light", label: "Light", icon: Sun },
-  { key: "dark", label: "Dark", icon: Moon },
-  { key: "system", label: "System", icon: Monitor },
-] as const
-
-export type ThemeKey = (typeof THEME_OPTIONS)[number]["key"]
-
 export type Project = {
   name: string
   desc: string
   uiUxDesc: string
+  stack: string[]
   link?: string
 }
 
 export const SKILLS = [
   {
-    category: "Languages",
-    skills: ["C++", "Go", "HTML/CSS", "Java", "JavaScript", "TypeScript"],
+    category: "Real-time & Audio",
+    skills: ["WebRTC", "LiveKit", "Krisp AI"],
   },
   {
-    category: "Frameworks & Libraries",
-    skills: ["Framer Motion", "Next.js", "Node.js", "React", "Tailwind CSS"],
+    category: "Frontend",
+    skills: [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Base UI",
+      "Motion",
+      "shadcn/ui",
+    ],
   },
   {
-    category: "Databases & Backend",
-    skills: ["PostgreSQL", "Supabase"],
+    category: "Backend & Data",
+    skills: ["Node.js", "Server Actions", "PostgreSQL", "Supabase"],
   },
   {
-    category: "Tools & Platforms",
-    skills: ["Git", "GitHub", "Postman", "Vercel"],
+    category: "Tooling",
+    skills: ["Git", "GitHub", "Vercel", "Bun", "Turborepo", "Postman"],
   },
 ]
 
 export const PROJECTS: Project[] = [
   {
     name: "Better Space",
-    desc: "Zero-account real-time audio rooms - spatial audio, hand-raise, emoji reactions.",
-    uiUxDesc: "Dark-first, emerald accents. Tactile mic toggle, reaction bursts. Spatial avatar layout. No accounts, just a link.",
+    desc: "Zero-account WebRTC voice rooms built on LiveKit - Krisp AI noise suppression, text chat, emoji reactions.",
+    uiUxDesc:
+      "Hosts grant and revoke the mic, mute, kick and promote co-hosts. Rooms are destroyed when the last person leaves - no history, no recordings.",
+    stack: [
+      "LiveKit",
+      "Krisp AI",
+      "Next.js",
+      "React",
+      "Base UI",
+      "Tailwind CSS",
+      "Bun",
+    ],
     link: "space",
   },
   {
     name: "WordLoom Studio",
-    desc: "Brand names from English phonotactics - length slider, vibe toggles, instant results.",
-    uiUxDesc: "One screen: 4-8 chars, tech/friendly/bold. Pronunciation, domain check, copy. Local history persists.",
+    desc: "Generates short, pronounceable brand names from real English letter patterns learned from 100k+ CMUdict words.",
+    uiUxDesc:
+      "Runs the Wordloom engine server-side. Filter by length, prefix, suffix and substring; real words come back with their WordNet definition.",
+    stack: [
+      "Wordloom",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Motion",
+      "Turborepo",
+    ],
     link: "wordloom-studio",
-  },
-  {
-    name: "Pricing Page",
-    desc: "Animated tier cards, shared usage slider, progressive feature matrix.",
-    uiUxDesc: "Spring hover, live price updates. Scroll-reveal checkmarks. Emerald CTAs, zinc base. Reduced-motion safe. 360px+.",
-    link: "pricing-section",
   },
 ]

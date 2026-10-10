@@ -43,7 +43,10 @@ function patchRealtimeToday(days: ApiDay[], realtimeCount: number): ApiDay[] {
     return patched
   }
 
-  return [...days, { date: TODAY, count: realtimeCount, level: levelForCount(realtimeCount) }]
+  return [
+    ...days,
+    { date: TODAY, count: realtimeCount, level: levelForCount(realtimeCount) },
+  ]
 }
 
 // GitHub renders the contribution graph on its own profile partial
@@ -52,14 +55,16 @@ function patchRealtimeToday(days: ApiDay[], realtimeCount: number): ApiDay[] {
 // GitHub's own realtime data and needs no token.
 function parseContributionsFragment(fragment: string): ApiDay[] {
   const cells = new Map<string, { date: string; level: number }>()
-  const cellRe = /data-date="(\d{4}-\d{2}-\d{2})" id="(contribution-day-component-\d+-\d+)" data-level="(\d)"/g
+  const cellRe =
+    /data-date="(\d{4}-\d{2}-\d{2})" id="(contribution-day-component-\d+-\d+)" data-level="(\d)"/g
   let cellMatch: RegExpExecArray | null
   while ((cellMatch = cellRe.exec(fragment))) {
     cells.set(cellMatch[2], { date: cellMatch[1], level: Number(cellMatch[3]) })
   }
 
   const tips = new Map<string, string>()
-  const tipRe = /<tool-tip[^>]*for="(contribution-day-component-\d+-\d+)"[^>]*>([\s\S]*?)<\/tool-tip>/g
+  const tipRe =
+    /<tool-tip[^>]*for="(contribution-day-component-\d+-\d+)"[^>]*>([\s\S]*?)<\/tool-tip>/g
   let tipMatch: RegExpExecArray | null
   while ((tipMatch = tipRe.exec(fragment))) {
     tips.set(tipMatch[1], tipMatch[2])
@@ -78,17 +83,24 @@ function parseContributionsFragment(fragment: string): ApiDay[] {
 }
 
 export async function GET() {
-  const userAgent = "portfoliov2/1.0 (+https://github.com/whoavidwivedi/portfoliov2)"
+  const userAgent =
+    "portfoliov2/1.0 (+https://github.com/whoavidwivedi/portfoliov2)"
   const token = process.env.GITHUB_TOKEN
 
   try {
-    const headers: Record<string, string> = { Accept: "application/vnd.github.v3+json", "User-Agent": userAgent }
+    const headers: Record<string, string> = {
+      Accept: "application/vnd.github.v3+json",
+      "User-Agent": userAgent,
+    }
     if (token) headers.Authorization = `Bearer ${token}`
 
-    const eventsRes = await fetch(`https://api.github.com/users/${USERNAME}/events?per_page=100`, {
-      headers,
-      next: { revalidate: 3600 },
-    })
+    const eventsRes = await fetch(
+      `https://api.github.com/users/${USERNAME}/events?per_page=100`,
+      {
+        headers,
+        next: { revalidate: 3600 },
+      }
+    )
 
     const reposByDate: Record<string, string[]> = {}
     let realtimeToday = 0
@@ -111,7 +123,10 @@ export async function GET() {
         if (event.created_at?.slice(0, 10) !== TODAY) continue
         if (event.type === "PushEvent") {
           const size = event.payload?.size
-          const count = typeof size === "number" && size > 0 ? size : event.payload?.commits?.length ?? 1
+          const count =
+            typeof size === "number" && size > 0
+              ? size
+              : (event.payload?.commits?.length ?? 1)
           realtimeToday += count
         } else if (
           event.type === "PullRequestEvent" ||
@@ -157,7 +172,8 @@ export async function GET() {
       if (gqlRes.ok) {
         const json = await gqlRes.json()
         if (!json.errors && json.data) {
-          const calendar = json.data.user.contributionsCollection.contributionCalendar
+          const calendar =
+            json.data.user.contributionsCollection.contributionCalendar
 
           const days = patchRealtimeToday(
             calendar.weeks.flatMap((week: GqlWeek) =>
@@ -165,9 +181,9 @@ export async function GET() {
                 date: day.date,
                 count: day.contributionCount,
                 level: levelForCount(day.contributionCount),
-              })),
+              }))
             ),
-            realtimeToday,
+            realtimeToday
           )
           const totalCount = days.reduce((sum, day) => sum + day.count, 0)
 
@@ -181,14 +197,20 @@ export async function GET() {
     }
 
     // Otherwise read GitHub's own realtime contribution calendar partial.
-    const fragmentRes = await fetch(`https://github.com/users/${USERNAME}/contributions`, {
-      headers: { "User-Agent": userAgent },
-      next: { revalidate: 3600 },
-    })
+    const fragmentRes = await fetch(
+      `https://github.com/users/${USERNAME}/contributions`,
+      {
+        headers: { "User-Agent": userAgent },
+        next: { revalidate: 3600 },
+      }
+    )
 
     if (fragmentRes.ok) {
       const fragment = await fragmentRes.text()
-      const days = patchRealtimeToday(parseContributionsFragment(fragment), realtimeToday)
+      const days = patchRealtimeToday(
+        parseContributionsFragment(fragment),
+        realtimeToday
+      )
       const totalCount = days.reduce((sum, day) => sum + day.count, 0)
 
       if (days.length) {
@@ -196,13 +218,27 @@ export async function GET() {
       }
     }
 
-    const realtimeDays = realtimeToday > 0
-      ? [{ date: TODAY, count: realtimeToday, level: levelForCount(realtimeToday) }]
-      : []
+    const realtimeDays =
+      realtimeToday > 0
+        ? [
+            {
+              date: TODAY,
+              count: realtimeToday,
+              level: levelForCount(realtimeToday),
+            },
+          ]
+        : []
     const fallbackTotal = realtimeDays.reduce((sum, day) => sum + day.count, 0)
 
-    return NextResponse.json({ totalCount: fallbackTotal, days: realtimeDays, reposByDate })
+    return NextResponse.json({
+      totalCount: fallbackTotal,
+      days: realtimeDays,
+      reposByDate,
+    })
   } catch {
-    return NextResponse.json({ totalCount: 0, days: [], reposByDate: {} }, { status: 500 })
+    return NextResponse.json(
+      { totalCount: 0, days: [], reposByDate: {} },
+      { status: 500 }
+    )
   }
 }
