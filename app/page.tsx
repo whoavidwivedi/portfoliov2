@@ -3,7 +3,6 @@ import { Header } from "@/components/sections/header"
 import { Experience } from "@/components/sections/experience"
 import { Projects } from "@/components/sections/projects"
 import { GitHubActivityLazy } from "@/components/ui/github-activity-lazy"
-import { Skills } from "@/components/sections/skills"
 import { Footer } from "@/components/sections/footer"
 
 export default function Page() {
@@ -34,10 +33,6 @@ export default function Page() {
 
           <div className="my-20 flex w-full justify-center">
             <GitHubActivityLazy username="whoavidwivedi" showMonths />
-          </div>
-
-          <div>
-            <Skills />
           </div>
 
           <div>
