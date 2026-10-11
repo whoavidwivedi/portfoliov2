@@ -3,6 +3,7 @@ import { Header } from "@/components/sections/header"
 import { Experience } from "@/components/sections/experience"
 import { Projects } from "@/components/sections/projects"
 import { GitHubActivityLazy } from "@/components/ui/github-activity-lazy"
+import { BotGhost } from "@/components/ui/bot-ghost"
 import { Footer } from "@/components/sections/footer"
 
 export default function Page() {
@@ -16,6 +17,8 @@ export default function Page() {
       </a>
 
       <ThemeToggle />
+
+      <BotGhost />
 
       <div className="mx-auto max-w-2xl px-6 py-24">
         <div>
