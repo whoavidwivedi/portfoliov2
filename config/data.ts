@@ -6,33 +6,6 @@ export type Project = {
   link?: string
 }
 
-export const SKILLS = [
-  {
-    category: "Real-time & Audio",
-    skills: ["WebRTC", "LiveKit", "Krisp AI"],
-  },
-  {
-    category: "Frontend",
-    skills: [
-      "TypeScript",
-      "React",
-      "Next.js",
-      "Tailwind CSS",
-      "Base UI",
-      "Motion",
-      "shadcn/ui",
-    ],
-  },
-  {
-    category: "Backend & Data",
-    skills: ["Node.js", "Server Actions", "PostgreSQL", "Supabase"],
-  },
-  {
-    category: "Tooling",
-    skills: ["Git", "GitHub", "Vercel", "Bun", "Turborepo", "Postman"],
-  },
-]
-
 export const PROJECTS: Project[] = [
   {
     name: "Better Space",
