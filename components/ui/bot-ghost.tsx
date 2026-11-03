@@ -3,11 +3,14 @@
 import { BotAvatar } from "bot-avatars"
 
 /**
- * One ghost, exactly as the library draws it: its own idle, its pointer
- * tracking, its hop, its shading, its theme. Nothing added, nothing wrapped.
+ * Floating interactive Ghost bot avatar.
  *
- * 15vh rather than 15%: same spot on screen, but it sits in the document
- * instead of over it, so it scrolls away rather than following you down.
+ * Configured with `plastic` shading for ultra-sharp, high-definition 3D contours
+ * and specular highlights (eliminating the low-res fuzzy fur artifacting of default fabric).
+ * Explicit size (84px) unlocks top-tier (128x128) matcap resolution on Retina displays
+ * and prevents browser CSS fallback distortions.
+ *
+ * Sits at 15vh in the document so it scrolls away naturally rather than sticking.
  */
 export function BotGhost() {
   return (
@@ -15,7 +18,13 @@ export function BotGhost() {
       style={{ left: "58%", top: "15vh" }}
       className="pointer-events-auto absolute"
     >
-      <BotAvatar type="ghost" />
+      <BotAvatar
+        type="ghost"
+        size={84}
+        shading="plastic"
+        brightness={1.06}
+        saturation={1.2}
+      />
     </div>
   )
 }
