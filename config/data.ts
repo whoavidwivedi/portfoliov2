@@ -8,6 +8,22 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    name: "Frames",
+    desc: "Native, hardware-accelerated macOS video player & library dashboard engineered exclusively for Apple Silicon.",
+    uiUxDesc:
+      "Zero-copy VideoToolbox decoding, 120Hz ProMotion fluid scrubbing, and asynchronous folder indexing wrapped in a minimal shadcn dark monochrome aesthetic.",
+    stack: [
+      "Swift 6",
+      "SwiftUI",
+      "Apple Silicon",
+      "VideoToolbox",
+      "AVFoundation",
+      "Metal",
+      "shadcn",
+    ],
+    link: "https://github.com/whoavidwivedi/frames",
+  },
+  {
     name: "Better Space",
     desc: "Zero-account WebRTC voice rooms built on LiveKit - Krisp AI noise suppression, text chat, emoji reactions.",
     uiUxDesc:
