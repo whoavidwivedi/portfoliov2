@@ -1,5 +1,7 @@
+import { ArrowUpRight } from "lucide-react"
 import { Squiggle } from "@/components/ui/squiggle"
 import { Badge } from "@/components/ui/badge"
+import { InstallSnippet } from "@/components/ui/install-snippet"
 import { PROJECTS } from "@/config/data"
 
 export function Projects() {
@@ -11,40 +13,47 @@ export function Projects() {
         </h2>
         <Squiggle />
       </div>
-      <div className="mt-8 space-y-8">
+      <div className="mt-8 space-y-10">
         {PROJECTS.map((p) => {
           const href = p.link?.startsWith("http")
             ? p.link
             : `https://${(p.link || p.name).toLowerCase()}.whoavidwivedi.work`
 
           return (
-            <a
-              key={p.name}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative block"
-            >
+            <div key={p.name} className="group relative block">
               <div className="absolute -inset-x-4 -inset-y-3 z-0 hidden rounded-xl lg:block" />
               <div className="relative z-10">
-                <span className="inline-flex items-center gap-1.5 font-semibold">
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/link inline-flex items-center gap-1.5 font-semibold"
+                >
                   <span className="relative">
-                    <span className="text-foreground [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-emerald-500">
+                    <span className="text-foreground transition-colors duration-150 [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:text-emerald-500">
                       {p.name}
                     </span>
                     <span
                       aria-hidden="true"
-                      className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-center scale-x-0 bg-emerald-500/70 transition-transform duration-200 ease-out [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-x-100"
+                      className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-center scale-x-0 bg-emerald-500/70 transition-transform duration-200 ease-out [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:scale-x-100"
                     />
                   </span>
-                </span>
+                  <ArrowUpRight className="size-3.5 text-muted-foreground/60 transition-transform duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:translate-x-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:text-emerald-500" />
+                </a>
                 <p className="mt-2 block text-sm leading-relaxed text-pretty text-muted-foreground">
                   {p.desc}
                 </p>
                 <p className="mt-2 block text-sm leading-relaxed font-medium tracking-tight text-pretty text-muted-foreground/70">
                   {p.uiUxDesc}
                 </p>
-                <div className="mt-3 flex flex-wrap gap-1.5">
+
+                {p.installCommand && (
+                  <div className="mt-3.5 max-w-xl">
+                    <InstallSnippet command={p.installCommand} />
+                  </div>
+                )}
+
+                <div className="mt-3.5 flex flex-wrap gap-1.5">
                   {p.stack.map((s) => (
                     <Badge
                       key={s}
@@ -56,7 +65,7 @@ export function Projects() {
                   ))}
                 </div>
               </div>
-            </a>
+            </div>
           )
         })}
       </div>

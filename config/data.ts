@@ -4,6 +4,7 @@ export type Project = {
   uiUxDesc: string
   stack: string[]
   link?: string
+  installCommand?: string
 }
 
 export const PROJECTS: Project[] = [
@@ -22,6 +23,8 @@ export const PROJECTS: Project[] = [
       "shadcn",
     ],
     link: "https://github.com/whoavidwivedi/frames",
+    installCommand:
+      '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/whoavidwivedi/frames/main/scripts/install.sh)"',
   },
   {
     name: "Better Space",
