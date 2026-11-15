@@ -64,6 +64,7 @@ export type TopRepo = {
   name: string
   count: number
   href: string
+  logo?: string
 }
 
 export const TOP_REPOS: TopRepo[] = [
@@ -71,15 +72,18 @@ export const TOP_REPOS: TopRepo[] = [
     name: "frames",
     count: 199,
     href: "https://github.com/whoavidwivedi/frames",
+    logo: "/logos/frames.png",
   },
   {
     name: "better-space",
     count: 129,
     href: "https://github.com/whoavidwivedi/better-space",
+    logo: "/logos/better-space.svg",
   },
   {
     name: "portfoliov2",
     count: 102,
     href: "https://github.com/whoavidwivedi/portfoliov2",
+    logo: "/logos/portfoliov2.svg",
   },
 ]
