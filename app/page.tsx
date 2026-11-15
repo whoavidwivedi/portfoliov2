@@ -4,6 +4,7 @@ import { Experience } from "@/components/sections/experience"
 import { Projects } from "@/components/sections/projects"
 import { GitHubActivityLazy } from "@/components/ui/github-activity-lazy"
 import { Footer } from "@/components/sections/footer"
+import { TOP_REPOS } from "@/config/data"
 
 export default function Page() {
   return (
@@ -32,7 +33,11 @@ export default function Page() {
           </div>
 
           <div className="my-20 flex w-full justify-center">
-            <GitHubActivityLazy username="whoavidwivedi" showMonths />
+            <GitHubActivityLazy
+              username="whoavidwivedi"
+              showMonths
+              repos={TOP_REPOS}
+            />
           </div>
 
           <div>
