@@ -21,7 +21,7 @@ export type Contribution = {
 export type RepoContribution = {
   name: string
   count: number
-  logo?: React.ReactNode
+  logo?: React.ReactNode | string
   href?: string
 }
 
@@ -429,7 +429,12 @@ const Avatar = ({
       className
     )}
   >
-    {repo.logo ?? repo.name.charAt(0)}
+    {typeof repo.logo === "string" ? (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src={repo.logo} alt="" className="size-full object-cover" />
+    ) : (
+      (repo.logo ?? repo.name.charAt(0))
+    )}
   </motion.span>
 )
 
