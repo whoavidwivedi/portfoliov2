@@ -59,3 +59,27 @@ export const PROJECTS: Project[] = [
     link: "wordloom-studio",
   },
 ]
+
+export type TopRepo = {
+  name: string
+  count: number
+  href: string
+}
+
+export const TOP_REPOS: TopRepo[] = [
+  {
+    name: "frames",
+    count: 199,
+    href: "https://github.com/whoavidwivedi/frames",
+  },
+  {
+    name: "better-space",
+    count: 129,
+    href: "https://github.com/whoavidwivedi/better-space",
+  },
+  {
+    name: "portfoliov2",
+    count: 102,
+    href: "https://github.com/whoavidwivedi/portfoliov2",
+  },
+]
