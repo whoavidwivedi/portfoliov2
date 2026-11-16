@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { Check, Copy, Terminal } from "lucide-react"
+import { Check, Command, Copy } from "lucide-react"
 import {
   Tooltip,
   TooltipTrigger,
@@ -34,7 +34,7 @@ export function InstallSnippet({
     <div className="group/snippet flex flex-col gap-1.5">
       {label && (
         <span className="flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-muted-foreground/80 uppercase">
-          <Terminal className="size-3 text-emerald-500/80" />
+          <Command className="size-3 text-emerald-500/80" />
           {label}
         </span>
       )}
