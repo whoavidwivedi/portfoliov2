@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Check, Copy } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { SocialLinks } from "@/components/sections/social-links"
 import {
   Tooltip,
   TooltipTrigger,
@@ -34,15 +35,18 @@ export function Header() {
 
   return (
     <header id="about" className="relative mb-20">
-      <Image
-        src="https://avatars.githubusercontent.com/u/85203267?v=4"
-        alt="Avi Dwivedi"
-        width={56}
-        height={56}
-        priority
-        draggable={false}
-        className="mb-6 size-14 rounded-full ring-1 ring-border/50 select-none"
-      />
+      <div className="mb-6 flex items-center justify-between">
+        <Image
+          src="https://avatars.githubusercontent.com/u/85203267?v=4"
+          alt="Avi Dwivedi"
+          width={56}
+          height={56}
+          priority
+          draggable={false}
+          className="size-14 rounded-full ring-1 ring-border/50 select-none"
+        />
+        <SocialLinks />
+      </div>
       <h1 className="text-4xl font-bold tracking-tight text-balance">
         Avi Dwivedi{" "}
         <Tooltip>
@@ -108,37 +112,8 @@ export function Header() {
         and detail feel inevitable - not decorative.
       </p>
       <div className="mt-6 text-sm text-muted-foreground">
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <a
-                  href="https://monkeytype.com/profile/whoavidwivedi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <kbd className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2 py-0.5 text-xs font-medium text-muted-foreground transition duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]">
-                    {/* Simple Icons "Monkeytype" - CC0, single path */}
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      role="img"
-                      aria-label="Monkeytype"
-                      className="size-3.5 text-[#e2b714]"
-                    >
-                      <path d="M20 14.4a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6ZM8.8 14.4h4.8a.8.8 0 1 1 0 1.6H8.8a.8.8 0 1 1 0-1.6ZM7.2 9.6a.8.8 0 0 1 .8.8V12a.8.8 0 1 1-1.6 0v-1.6a.8.8 0 0 1 .8-.8Z M3.201 10.359A2.4 2.4 0 0 1 7.2 8.612a2.4 2.4 0 0 1 4 1.788V12a.8.8 0 1 1-1.6 0v-1.6a.8.8 0 1 0-1.6 0V12a.8.8 0 1 1-1.6 0v-1.6a.8.8 0 1 0-1.6 0V12a.8.8 0 1 1-1.6 0v-1.6l.001-.041ZM17.6 12.8v2.4a.8.8 0 1 1-1.6 0v-2.4h-2.306c-.493 0-.894-.358-.894-.8 0-.442.401-.8.894-.8h6.212c.493 0 .894.358.894.8 0 .442-.401.8-.894.8H17.6ZM16.8 8H20a.8.8 0 1 1 0 1.6h-3.2a.8.8 0 1 1 0-1.6ZM4 14.4h1.6a.8.8 0 1 1 0 1.6H4a.8.8 0 1 1 0-1.6ZM13.2 8h.4a.8.8 0 1 1 0 1.6h-.4a.8.8 0 1 1 0-1.6Z M1.6 14.4H0V8.8c0-2.208 1.792-4 4-4h16c2.208 0 4 1.792 4 4v6.4c0 2.208-1.792 4-4 4H4c-2.208 0-4-1.792-4-4v-1.6h1.6v1.6A2.4 2.4 0 0 0 4 17.6h16a2.4 2.4 0 0 0 2.4-2.4V8.8A2.4 2.4 0 0 0 20 6.4H4a2.4 2.4 0 0 0-2.4 2.4v5.6Z" />
-                    </svg>
-                    <span>104 WPM</span>
-                  </kbd>
-                </a>
-              }
-            />
-            <TooltipContent side="right">
-              Average typing speed on Monkeytype
-            </TooltipContent>
-          </Tooltip>
-        </div>
-        <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-3">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-3">
+
           <a
             href={GMAIL_COMPOSE}
             target="_blank"
