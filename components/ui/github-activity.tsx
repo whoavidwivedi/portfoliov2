@@ -585,7 +585,7 @@ const GitHubActivity = ({
     <div
       data-slot="github-activity"
       className={cn(
-        "relative max-w-full overflow-hidden rounded-[28px] bg-white p-4 dark:bg-black",
+        "relative max-w-full overflow-hidden rounded-[28px] bg-zinc-50 p-4 dark:bg-black",
         repos.length > 0 && "pb-[76px]",
         className
       )}
