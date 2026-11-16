@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react"
 import Image from "next/image"
-import { Check, Copy } from "lucide-react"
+import { Check, Copy, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { SocialLinks } from "@/components/sections/social-links"
@@ -14,11 +14,10 @@ import {
 
 const EMAIL = "theavidwivedi@gmail.com"
 
-// Gmail's web composer instead of mailto:, so the draft always opens in Gmail
-// with the template prefilled rather than in whatever the OS defaults to.
-const GMAIL_COMPOSE =
-  `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}` +
-  `&su=${encodeURIComponent("Hello Avi")}` +
+// mailto: opens the visitor's default mail client with the template prefilled,
+// instead of forcing Gmail's web composer (which breaks for non-Gmail users).
+const MAILTO =
+  `mailto:${EMAIL}?subject=${encodeURIComponent("Hello Avi")}` +
   `&body=${encodeURIComponent("Hi Avi,\n\n")}`
 
 export function Header() {
@@ -115,36 +114,10 @@ export function Header() {
         <div className="flex flex-wrap items-center gap-x-3 gap-y-3">
 
           <a
-            href={GMAIL_COMPOSE}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={MAILTO}
             className="flex items-center gap-2 rounded-md border border-border/50 bg-muted/30 px-3 py-1.5 transition duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-muted/50 active:scale-[0.97]"
           >
-            {/* Gmail 2020 icon (Wikimedia Commons) */}
-            <svg
-              viewBox="52 42 88 66"
-              role="img"
-              aria-label="Gmail"
-              className="size-3.5"
-            >
-              <path
-                fill="#4285f4"
-                d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"
-              />
-              <path
-                fill="#34a853"
-                d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"
-              />
-              <path
-                fill="#fbbc04"
-                d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"
-              />
-              <path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92" />
-              <path
-                fill="#c5221f"
-                d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"
-              />
-            </svg>
+            <Mail className="size-3.5" />
             theavidwivedi@gmail.com
           </a>
           <Tooltip
