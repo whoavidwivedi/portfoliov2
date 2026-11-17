@@ -1,7 +1,15 @@
 import { ArrowUpRight } from "lucide-react"
 import { Squiggle } from "@/components/ui/squiggle"
 import { Badge } from "@/components/ui/badge"
-import { InstallSnippet } from "@/components/ui/install-snippet"
+import {
+  CodeBlock,
+  CodeBlockActions,
+  CodeBlockContent,
+  CodeBlockCopyButton,
+  CodeBlockHeader,
+  CodeBlockTitle,
+} from "@/components/ui/code-block"
+import { Command } from "lucide-react"
 import { PROJECTS } from "@/config/data"
 
 export function Projects() {
@@ -49,7 +57,18 @@ export function Projects() {
 
                 {p.installCommand && (
                   <div className="mt-3.5 max-w-xl">
-                    <InstallSnippet command={p.installCommand} />
+                    <CodeBlock size="sm">
+                      <CodeBlockHeader>
+                        <CodeBlockTitle>
+                          <Command className="size-3 text-emerald-500/80" />
+                          Quick install (macOS)
+                        </CodeBlockTitle>
+                        <CodeBlockActions>
+                          <CodeBlockCopyButton value={p.installCommand} />
+                        </CodeBlockActions>
+                      </CodeBlockHeader>
+                      <CodeBlockContent>{p.installCommand}</CodeBlockContent>
+                    </CodeBlock>
                   </div>
                 )}
 
