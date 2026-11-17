@@ -67,7 +67,9 @@ export function Projects() {
                           <CodeBlockCopyButton value={p.installCommand} />
                         </CodeBlockActions>
                       </CodeBlockHeader>
-                      <CodeBlockContent wrap>{p.installCommand}</CodeBlockContent>
+                      <CodeBlockContent wrap className="overflow-hidden">
+                        {p.installCommand}
+                      </CodeBlockContent>
                     </CodeBlock>
                   </div>
                 )}
