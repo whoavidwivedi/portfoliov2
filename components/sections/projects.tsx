@@ -5,10 +5,10 @@ import {
   CodeBlock,
   CodeBlockActions,
   CodeBlockContent,
-  CodeBlockCopyButton,
   CodeBlockHeader,
   CodeBlockTitle,
 } from "@/components/ui/code-block"
+import { CopyCommandButton } from "@/components/ui/copy-command-button"
 import { Command } from "lucide-react"
 import { PROJECTS } from "@/config/data"
 
@@ -64,7 +64,7 @@ export function Projects() {
                           Quick install (macOS)
                         </CodeBlockTitle>
                         <CodeBlockActions>
-                          <CodeBlockCopyButton value={p.installCommand} />
+                          <CopyCommandButton value={p.installCommand} />
                         </CodeBlockActions>
                       </CodeBlockHeader>
                       <CodeBlockContent wrap className="overflow-hidden">
