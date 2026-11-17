@@ -67,7 +67,7 @@ export function Projects() {
                           <CodeBlockCopyButton value={p.installCommand} />
                         </CodeBlockActions>
                       </CodeBlockHeader>
-                      <CodeBlockContent>{p.installCommand}</CodeBlockContent>
+                      <CodeBlockContent wrap>{p.installCommand}</CodeBlockContent>
                     </CodeBlock>
                   </div>
                 )}
