@@ -1,4 +1,4 @@
-import { Squiggle } from "@/components/ui/squiggle"
+import { SectionHeading } from "@/components/ui/section-heading"
 import { Badge } from "@/components/ui/badge"
 import {
   CodeBlock,
@@ -14,12 +14,7 @@ import { PROJECTS } from "@/config/data"
 export function Projects() {
   return (
     <section id="projects" className="mb-20">
-      <div className="w-fit">
-        <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
-          Projects
-        </h2>
-        <Squiggle />
-      </div>
+      <SectionHeading>Projects</SectionHeading>
       <div className="mt-8 space-y-10">
         {PROJECTS.map((p) => {
           const href = p.link?.startsWith("http")
