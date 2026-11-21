@@ -67,7 +67,11 @@ export function Projects() {
                           <CopyCommandButton value={p.installCommand} />
                         </CodeBlockActions>
                       </CodeBlockHeader>
-                      <CodeBlockContent wrap className="overflow-hidden">
+                      <CodeBlockContent
+                        wrap
+                        className="overflow-hidden wrap-anywhere"
+                        style={{ maskImage: "none", WebkitMaskImage: "none" }}
+                      >
                         {p.installCommand}
                       </CodeBlockContent>
                     </CodeBlock>
