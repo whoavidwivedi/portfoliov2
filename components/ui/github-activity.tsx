@@ -629,7 +629,7 @@ const GitHubActivity = ({
             aria-label={
               open ? "Hide top repositories" : "Show top repositories"
             }
-            className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
+            className="flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-3 text-left"
           >
             <span className="truncate text-sm text-foreground">{label}</span>
 
