@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react"
 import { Squiggle } from "@/components/ui/squiggle"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -35,7 +34,7 @@ export function Projects() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/link inline-flex items-center gap-1.5 font-semibold"
+                  className="group/link inline-block font-semibold"
                 >
                   <span className="relative">
                     <span className="text-foreground transition-colors duration-150 [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:text-emerald-500">
@@ -46,7 +45,6 @@ export function Projects() {
                       className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-center scale-x-0 bg-emerald-500/70 transition-transform duration-200 ease-out [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:scale-x-100"
                     />
                   </span>
-                  <ArrowUpRight className="size-3.5 text-muted-foreground/60 transition-transform duration-200 [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:translate-x-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover/link:text-emerald-500" />
                 </a>
                 <p className="mt-2 block text-sm leading-relaxed text-pretty text-muted-foreground">
                   {p.desc}
