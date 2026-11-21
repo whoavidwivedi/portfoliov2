@@ -62,8 +62,12 @@ export function Projects() {
                       </CodeBlockHeader>
                       <CodeBlockContent
                         wrap
-                        className="overflow-hidden wrap-anywhere"
-                        style={{ maskImage: "none", WebkitMaskImage: "none" }}
+                        className="overflow-hidden"
+                        style={{
+                          maskImage: "none",
+                          WebkitMaskImage: "none",
+                          overflowWrap: "anywhere",
+                        }}
                       >
                         {p.installCommand}
                       </CodeBlockContent>
