@@ -1,12 +1,5 @@
-import { cn } from "cn"
-
-export function Squiggle({ className }: { className?: string }) {
+export function Squiggle() {
   return (
-    <div
-      className={cn(
-        "h-px w-full rounded-full bg-emerald-300 dark:bg-emerald-600",
-        className
-      )}
-    />
+    <div className="h-px w-full rounded-full bg-emerald-300 dark:bg-emerald-600" />
   )
 }
