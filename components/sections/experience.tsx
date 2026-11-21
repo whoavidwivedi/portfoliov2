@@ -1,14 +1,9 @@
-import { Squiggle } from "@/components/ui/squiggle"
+import { SectionHeading } from "@/components/ui/section-heading"
 
 export function Experience() {
   return (
     <section id="experience" className="mb-20">
-      <div className="w-fit">
-        <h2 className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
-          Experience
-        </h2>
-        <Squiggle />
-      </div>
+      <SectionHeading>Experience</SectionHeading>
       <div className="mt-8 space-y-10">
         {[
           {
