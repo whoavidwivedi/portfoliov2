@@ -619,10 +619,17 @@ const GitHubActivity = ({
           style={{ borderRadius: 18 }}
           transition={transition}
         >
-          <motion.div
+          <motion.button
             layout="position"
             transition={headerTransition}
-            className="flex items-center justify-between gap-3 px-4 py-3"
+            type="button"
+            onClick={toggle}
+            aria-expanded={open}
+            aria-controls={`${uid}-panel`}
+            aria-label={
+              open ? "Hide top repositories" : "Show top repositories"
+            }
+            className="flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-foreground/5 focus-visible:bg-foreground/5 focus-visible:outline-none"
           >
             <span className="truncate text-sm text-foreground">{label}</span>
 
@@ -641,20 +648,11 @@ const GitHubActivity = ({
                 </div>
               )}
 
-              <button
-                type="button"
-                onClick={toggle}
-                aria-expanded={open}
-                aria-controls={`${uid}-panel`}
-                aria-label={
-                  open ? "Hide top repositories" : "Show top repositories"
-                }
-                className="grid size-7 shrink-0 place-items-center rounded-full bg-card"
-              >
+              <span className="grid size-7 shrink-0 place-items-center rounded-full bg-card">
                 <Chevron open={open} transition={transition} />
-              </button>
+              </span>
             </div>
-          </motion.div>
+          </motion.button>
 
           <AnimatePresence initial={false} mode="popLayout">
             {open && (
